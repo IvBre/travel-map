@@ -63,7 +63,9 @@ class GoogleOauth2Provider {
 
     /** @param Request $request */
     public function setClient($request) {
-        $redirect_uri = 'http://' . $request->server->get('HTTP_HOST') . $request->server->get('PHP_SELF');
+        $redirect_uri = 'http://' . $request->server->get('HTTP_HOST') . $request->server->get('PHP_SELF') . '/login';
         $this->client->setRedirectUri($redirect_uri);
+        $this->client->setAccessType("offline");
+        $this->client->setIncludeGrantedScopes(true);
     }
 }

@@ -10,11 +10,10 @@ $app['google_client_secret'] = '../app/google_oauth2_client_secret.json';
 
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options' => array(
-        'driver' => 'pdo_mysql',
-        'dbhost' => 'localhost',
+        'host' => 'mysql',
         'dbname' => 'travel-map',
         'user' => 'root',
-        'password' => 'root',
+        'password' => 'secret',
     ),
 ));
 
@@ -22,12 +21,12 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     'security.firewalls' => [
+        'login' => array(
+            'pattern' => '^/login$',
+        ),
         'secured_area' => [
-            'pattern' => '/',
-            'anonymous' => true,
-            'form' => array(
-                'login_path' => '/login',
-            ),
+            'pattern' => '^.*$',
+            'form' => array('login_path' => '/login', 'check_path' => '/login_check'),
             'logout' => array(
                 'logout_path' => '/logout',
             ),

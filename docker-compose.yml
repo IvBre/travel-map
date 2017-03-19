@@ -1,14 +1,60 @@
-application:
-  image: php
-  ports:
-    - "80:80"
-  links:
-    - mysql
-  volumes:
-    - .:/var/www
-mysql:
-  image: mysql
-  ports:
-    - "3306:3306"
-  environment:
-    MYSQL_ROOT_PASSWORD: root
+version: "2.1"
+
+services:
+
+  nginx:
+      build: ./setup/nginx/
+      ports:
+          - 80:80
+      depends_on:
+          - php
+      networks:
+          - server
+      volumes_from:
+          - app
+
+  php:
+      build: ./setup/php/
+      expose:
+          - 9000
+      networks:
+          - database
+          - server
+      depends_on:
+          - mysql
+      volumes_from:
+          - app
+
+  app:
+      image: php:7.0-fpm
+      volumes:
+          - .:/var/www
+      command: "true"
+
+  mysql:
+      image: mysql:latest
+      volumes:
+          - data:/var/lib/mysql
+      networks:
+          - database
+      environment:
+          MYSQL_ROOT_PASSWORD: secret
+          MYSQL_DATABASE: travel-map
+
+  phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      ports:
+          - 8080:80
+      networks:
+          - database
+      depends_on:
+          - mysql
+      environment:
+          PMA_HOST: mysql
+
+volumes:
+    data:
+
+networks:
+    database:
+    server:

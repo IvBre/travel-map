@@ -6,6 +6,7 @@ use Google_Service_Calendar;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use TravelMap\Entity\User;
@@ -17,6 +18,7 @@ class Main {
     public function index(Request $request, Application $app) {
         $loginProvider = new GoogleOauth2Provider($app['google_client_secret']);
         $loginProvider->setClient($request);
+
         $service = new Google_Service_Calendar($loginProvider->getClient());
 
         // Print the next 10 events on the user's calendar.
@@ -41,12 +43,14 @@ class Main {
                 printf("%s (%s)\n", $event->getSummary(), $start);
             }
         }
-
+        return new Response('test');
     }
 
     public function login(Request $request, Application $app) {
         $loginProvider = new GoogleOauth2Provider($app['google_client_secret']);
         $loginProvider->setClient($request);
+        $userProvider = new UserProvider($app['db']);
+        $user = $userProvider->getUserByEmail('slatkishar@gmail.com');
 
         if ($request->query->has('code')) {
             $accessToken = $loginProvider->getAccessToken($request->query->get('code'));
