@@ -31,7 +31,7 @@ class UserProvider
             ->execute()
             ->fetch();
 
-        if (count($result) === 0) {
+        if (!$result) {
             return null;
         }
 
