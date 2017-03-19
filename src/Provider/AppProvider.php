@@ -9,33 +9,13 @@ namespace TravelMap\Provider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Silex\Provider\DoctrineServiceProvider;
-use Silex\Provider\SecurityServiceProvider;
-use Silex\Provider\SessionServiceProvider;
 
 final class AppProvider implements ServiceProviderInterface {
 
     /** @inheritdoc */
-    public function register(Container $pimple) {
-        $pimple->register(new DoctrineServiceProvider(), array(
-            'db.options' => include_once $pimple['app_config_path'] . "/db.php",
-        ));
-
-        $pimple->register(new SessionServiceProvider());
-
-        $pimple->register(new SecurityServiceProvider(), array(
-            'security.firewalls' => [
-                'login' => array(
-                    'pattern' => '^/login$',
-                ),
-                'secured_area' => [
-                    'pattern' => '^.*$',
-                    'form' => array('login_path' => '/login', 'check_path' => '/login_check'),
-                    'logout' => array(
-                        'logout_path' => '/logout',
-                    ),
-                ]
-            ]
-        ));
+    public function register(Container $app) {
+        $app['provider.google_oauth2'] = $app->protect(function () use ($app) {
+            return new GoogleOauth2Provider($app['google_client_secret'], $app['base_url']);
+        });
     }
 }

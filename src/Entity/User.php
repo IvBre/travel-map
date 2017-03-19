@@ -33,7 +33,7 @@ final class User implements UserInterface {
     private $created;
 
     /** @var DateTime */
-    private $lastLogin;
+    private $updated;
 
     public function __construct(
         $id = null,
@@ -42,7 +42,7 @@ final class User implements UserInterface {
         Name $firstName,
         Name $lastName,
         DateTime $created = null,
-        DateTime $lastLogin = null
+        DateTime $updated = null
     ) {
         $this->id = $id;
         $this->accessToken = $accessToken;
@@ -50,12 +50,12 @@ final class User implements UserInterface {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->created = $created;
-        $this->lastLogin = $lastLogin;
+        $this->updated = $updated;
     }
 
     public function __toString()
     {
-        return $this->getEmail();
+        return (string) $this->getEmail();
     }
 
     public function getId() {
@@ -82,8 +82,8 @@ final class User implements UserInterface {
         return $this->created;
     }
 
-    public function getLastLogin() {
-        return $this->lastLogin;
+    public function getUpdated() {
+        return $this->updated;
     }
 
     /** @inheritdoc */

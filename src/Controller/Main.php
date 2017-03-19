@@ -15,45 +15,24 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use TravelMap\Entity\User;
-use TravelMap\GoogleOauth2Provider;
+use TravelMap\Provider\ProviderInterface;
 use TravelMap\UserProvider;
 
 final class Main {
 
-    public function index(Request $request, Application $app) {
-        $loginProvider = new GoogleOauth2Provider($app['google_client_secret']);
-        $loginProvider->setClient($request);
+    public function index(Application $app) {
+        /** @var ProviderInterface $loginProvider */
+        $loginProvider = $app['provider.google_oauth2'];
+        $loginProvider->connect($app['user']);
 
-        $service = new Google_Service_Calendar($loginProvider->getClient());
+        $events = $loginProvider->getUserEvents();
 
-        // Print the next 10 events on the user's calendar.
-        $calendarId = 'primary';
-        $optParams = array(
-            'maxResults' => 10,
-            'orderBy' => 'startTime',
-            'singleEvents' => TRUE,
-            'timeMin' => date('c'),
-        );
-        $results = $service->events->listEvents($calendarId, $optParams);
-
-        if (count($results->getItems()) == 0) {
-            print "No upcoming events found.\n";
-        } else {
-            print "Upcoming events:\n";
-            foreach ($results->getItems() as $event) {
-                $start = $event->start->dateTime;
-                if (empty($start)) {
-                    $start = $event->start->date;
-                }
-                printf("%s (%s)\n", $event->getSummary(), $start);
-            }
-        }
-        return new Response('test');
+        return new Response('test: ' . $events);
     }
 
     public function login(Request $request, Application $app) {
-        $loginProvider = new GoogleOauth2Provider($app['google_client_secret']);
-        $loginProvider->setClient($request);
+        /** @var ProviderInterface $loginProvider */
+        $loginProvider = $app['provider.google_oauth2'];
 
         if ($request->query->has('code')) {
             $accessToken = $loginProvider->getAccessToken($request->query->get('code'));
@@ -62,10 +41,10 @@ final class Main {
             $email = $me->getEmail();
 
             $userProvider = new UserProvider($app['db']);
-            $user = $userProvider->getUserByEmail($email);
+            $user = $userProvider->loadUserByUsername($email);
 
             if ($user === null) {
-                $user = new User(null, $email, $accessToken['access_token'], $me->getGivenName(), $me->getFamilyName());
+                $user = new User(null, $email, $accessToken['access_token'], $me->getFirstName(), $me->getLastName());
                 $userProvider->createUser($user);
             }
             else {

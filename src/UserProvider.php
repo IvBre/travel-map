@@ -39,7 +39,7 @@ final class UserProvider implements UserProviderInterface {
         $firstName = new Name($user['first_name']);
         $lastName = new Name($user['last_name']);
         $created = new DateTime($user['created']);
-        $lastLogin = new DateTime($user['last_login']);
+        $updated = new DateTime($user['updated']);
 
         return new User(
             $user['id'],
@@ -48,7 +48,7 @@ final class UserProvider implements UserProviderInterface {
             $firstName,
             $lastName,
             $created,
-            $lastLogin
+            $updated
             );
     }
 

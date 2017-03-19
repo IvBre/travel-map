@@ -16,7 +16,7 @@ final class Email {
      * @param string $email
      */
     public function __construct($email) {
-        assert(filter_var(FILTER_VALIDATE_EMAIL, $email), "Invalid email.");
+        assert(filter_var($email, FILTER_VALIDATE_EMAIL) !== false, "Invalid email");
 
         $this->email = $email;
     }
