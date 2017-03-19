@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use TravelMap\Entity\User;
+use TravelMap\Repository\UserRepository;
 use TravelMap\ValueObject\AccessToken;
 use TravelMap\ValueObject\DateTime;
 use TravelMap\ValueObject\Email;
@@ -20,36 +21,21 @@ use TravelMap\ValueObject\Name;
 
 final class UserProvider implements UserProviderInterface {
 
-    /** @var Connection */
-    private $conn;
+    /** @var UserRepository */
+    private $repository;
 
-    public function __construct(Connection $conn) {
-        $this->conn = $conn;
+    public function __construct(UserRepository $repository) {
+        $this->repository = $repository;
     }
 
     /** @inheritdoc */
     public function loadUserByUsername($username) {
-        $stmt = $this->conn->executeQuery('SELECT * FROM user WHERE email = ?', array(strtolower($username)));
-        if (!$user = $stmt->fetch()) {
+        $user = $this->repository->getUserByEmail(new Email($username));
+        if ($user === null) {
             throw new UsernameNotFoundException(sprintf('Email "%s" does not exist.', $username));
         }
 
-        $accessToken = new AccessToken($user['access_token']);
-        $email = new Email($user['email']);
-        $firstName = new Name($user['first_name']);
-        $lastName = new Name($user['last_name']);
-        $created = new DateTime($user['created']);
-        $updated = new DateTime($user['updated']);
-
-        return new User(
-            $user['id'],
-            $accessToken,
-            $email,
-            $firstName,
-            $lastName,
-            $created,
-            $updated
-            );
+        return $user;
     }
 
     /** @inheritdoc */

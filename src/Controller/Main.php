@@ -16,14 +16,14 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use TravelMap\Entity\User;
 use TravelMap\Provider\ProviderInterface;
-use TravelMap\UserProvider;
+use TravelMap\Repository\UserRepository;
+use TravelMap\ValueObject\AccessToken;
 
 final class Main {
 
     public function index(Application $app) {
         /** @var ProviderInterface $loginProvider */
         $loginProvider = $app['provider.google_oauth2'];
-        $loginProvider->connect($app['user']);
 
         $events = $loginProvider->getUserEvents();
 
@@ -38,17 +38,23 @@ final class Main {
             $accessToken = $loginProvider->getAccessToken($request->query->get('code'));
 
             $me = $loginProvider->getUserInfo();
-            $email = $me->getEmail();
 
-            $userProvider = new UserProvider($app['db']);
-            $user = $userProvider->loadUserByUsername($email);
+            /** @var UserRepository $userRepository */
+            $userRepository = $app['repository.user'];
+            $user = $userRepository->getUserByEmail($me->getEmail());
 
             if ($user === null) {
-                $user = new User(null, $email, $accessToken['access_token'], $me->getFirstName(), $me->getLastName());
-                $userProvider->createUser($user);
+                $user = new User(
+                    null,
+                    new AccessToken($accessToken['access_token']),
+                    $me->getEmail(),
+                    $me->getFirstName(),
+                    $me->getLastName()
+                );
+                $userRepository->createUser($user);
             }
             else {
-                $userProvider->updateUser($user);
+                $userRepository->updateUser($user);
             }
 
             $token = new UsernamePasswordToken($user, null, "secured_area");

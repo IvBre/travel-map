@@ -8,7 +8,6 @@
 namespace TravelMap\Provider;
 
 use TravelMap\Entity\ExternalProfile;
-use TravelMap\Entity\User;
 
 /**
  * In case of a new source for the map
@@ -17,8 +16,6 @@ use TravelMap\Entity\User;
 interface ProviderInterface {
 
     public function getAuthUrl();
-
-    public function connect(User $user);
 
     public function getAccessToken($code);
 

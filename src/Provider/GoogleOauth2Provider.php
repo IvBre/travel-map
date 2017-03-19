@@ -77,15 +77,6 @@ final class GoogleOauth2Provider implements ProviderInterface {
         return $externalProfile;
     }
 
-    /** @param Request $request */
-    public function setClient($request) {
-
-    }
-
-    public function connect(User $user) {
-
-    }
-
     public function getUserEvents() {
         $service = new Google_Service_Calendar($this->client);
 

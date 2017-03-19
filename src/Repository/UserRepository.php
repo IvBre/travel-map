@@ -9,6 +9,10 @@ namespace TravelMap\Repository;
 
 use Doctrine\DBAL\Connection;
 use TravelMap\Entity\User;
+use TravelMap\ValueObject\AccessToken;
+use TravelMap\ValueObject\DateTime;
+use TravelMap\ValueObject\Email;
+use TravelMap\ValueObject\Name;
 
 final class UserRepository {
 
@@ -17,6 +21,41 @@ final class UserRepository {
 
     public function __construct(Connection $db) {
         $this->db = $db;
+    }
+
+    /**
+     * @param Email $email
+     * @return null|User
+     */
+    public function getUserByEmail(Email $email) {
+        //check if user exists
+        $query = <<<SQL
+SELECT id, access_token, email, first_name, last_name
+FROM user
+WHERE email = ?
+SQL;
+        $user = $this->db->fetchAssoc($query, [ $email ]);
+
+        if (!$user) {
+            return null;
+        }
+
+        $accessToken = new AccessToken($user['access_token']);
+        $email = new Email($user['email']);
+        $firstName = new Name($user['first_name']);
+        $lastName = new Name($user['last_name']);
+        $created = new DateTime($user['created']);
+        $updated = new DateTime($user['updated']);
+
+        return new User(
+            $user['id'],
+            $accessToken,
+            $email,
+            $firstName,
+            $lastName,
+            $created,
+            $updated
+        );
     }
 
     /**
