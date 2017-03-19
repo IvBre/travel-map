@@ -1,31 +1,49 @@
 <?php
-
 /**
- * Created by PhpStorm.
- * User: ivana
+ * Author: Ivana Petrovic <petrovivana@gmail.com>
  * Date: 1/25/17
  * Time: 9:58 PM
  */
 
 namespace TravelMap\Entity;
 
-class User {
+use Symfony\Component\Security\Core\User\UserInterface;
+use TravelMap\ValueObject\AccessToken;
+use TravelMap\ValueObject\DateTime;
+use TravelMap\ValueObject\Email;
+use TravelMap\ValueObject\Name;
+
+final class User implements UserInterface {
 
     private $id;
 
+    /** @var AccessToken */
     private $accessToken;
 
+    /** @var Email */
     private $email;
 
+    /** @var Name */
     private $firstName;
 
+    /** @var Name */
     private $lastName;
 
+    /** @var DateTime */
     private $created;
 
+    /** @var DateTime */
     private $lastLogin;
 
-    public function __construct($id = null, $accessToken, $email, $firstName, $lastName, $created = null, $lastLogin = null) {
+    public function __construct(
+        $id = null,
+        AccessToken $accessToken,
+        Email $email,
+        Name $firstName,
+        Name $lastName,
+        DateTime $created = null,
+        DateTime $lastLogin = null
+    ) {
         $this->id = $id;
         $this->accessToken = $accessToken;
         $this->email = $email;
@@ -66,5 +84,31 @@ class User {
 
     public function getLastLogin() {
         return $this->lastLogin;
+    }
+
+    /** @inheritdoc */
+    public function getRoles() {
+        return [ 'ROLE_USER' ];
+    }
+
+    /** @inheritdoc */
+    public function getPassword() {
+        // we do not need a password
+        return '';
+    }
+
+    /** @inheritdoc */
+    public function getSalt() {
+        return null;
+    }
+
+    /** @inheritdoc */
+    public function getUsername() {
+        return $this->email;
+    }
+
+    /** @inheritdoc */
+    public function eraseCredentials() {
+
     }
 }

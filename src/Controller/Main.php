@@ -49,8 +49,6 @@ class Main {
     public function login(Request $request, Application $app) {
         $loginProvider = new GoogleOauth2Provider($app['google_client_secret']);
         $loginProvider->setClient($request);
-        $userProvider = new UserProvider($app['db']);
-        $user = $userProvider->getUserByEmail('slatkishar@gmail.com');
 
         if ($request->query->has('code')) {
             $accessToken = $loginProvider->getAccessToken($request->query->get('code'));

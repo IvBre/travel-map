@@ -1,7 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: ivana
+ * Author: Ivana Petrovic <petrovivana@gmail.com>
  * Date: 1/25/17
  * Time: 9:55 PM
  */
@@ -9,54 +8,61 @@
 namespace TravelMap;
 
 use Doctrine\DBAL\Connection;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 use TravelMap\Entity\User;
+use TravelMap\ValueObject\AccessToken;
+use TravelMap\ValueObject\DateTime;
+use TravelMap\ValueObject\Email;
+use TravelMap\ValueObject\Name;
 
-class UserProvider
-{
+class UserProvider implements UserProviderInterface {
+
     /** @var Connection */
-    private $db;
+    private $conn;
 
-    public function __construct(Connection $db)
-    {
-        $this->db = $db;
+    public function __construct(Connection $conn) {
+        $this->conn = $conn;
     }
 
-    public function getUserByEmail($email) {
-        //check if user exists
-        $result = $this->db->createQueryBuilder()
-            ->select('id, access_token, email, first_name, last_name')
-            ->from('user')
-            ->where('email = :email')
-            ->setParameter('email', $email)
-            ->execute()
-            ->fetch();
-
-        if (!$result) {
-            return null;
+    /** @inheritdoc */
+    public function loadUserByUsername($username) {
+        $stmt = $this->conn->executeQuery('SELECT * FROM user WHERE email = ?', array(strtolower($username)));
+        if (!$user = $stmt->fetch()) {
+            throw new UsernameNotFoundException(sprintf('Email "%s" does not exist.', $username));
         }
 
-        $user = new User($result->id, $result->access_token, $result->emal, $result->first_name, $result->last_name);
+        $accessToken = new AccessToken($user['access_token']);
+        $email = new Email($user['email']);
+        $firstName = new Name($user['first_name']);
+        $lastName = new Name($user['last_name']);
+        $created = new DateTime($user['created']);
+        $lastLogin = new DateTime($user['last_login']);
 
-        return $user;
+        return new User(
+            $user['id'],
+            $accessToken,
+            $email,
+            $firstName,
+            $lastName,
+            $created,
+            $lastLogin
+            );
     }
 
-    public function createUser(User $user) {
-        $this->db->insert('user', [
-            'email' => $user->getEmail(),
-            'access_token' => $user->getAccessToken(),
-            'first_name' => $user->getFirstName(),
-            'last_name' => $user->getLastName(),
-            'created' => date('Y-m-d H:m:s'),
-        ]);
+    /** @inheritdoc */
+    public function refreshUser(UserInterface $user) {
+        if (!$user instanceof User) {
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
+        }
+
+        return $this->loadUserByUsername($user->getUsername());
     }
 
-    public function updateUser(User $user) {
-        $this->db->update('user', [
-            'access_token' => $user->getAccessToken(),
-            'first_name' => $user->getFirstName(),
-            'last_name' => $user->getLastName(),
-        ], [
-            'id' => $user->getId()
-        ]);
+    /** @inheritdoc */
+    public function supportsClass($class) {
+        return $class === 'TravelMap\Entity\User';
     }
 }
