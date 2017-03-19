@@ -5,7 +5,7 @@
  * Time: 5:56 PM
  */
 
-namespace TravelMap\Provider;
+namespace TravelMap\Provider\Authentication;
 
 use TravelMap\Entity\ExternalProfile;
 
@@ -14,6 +14,8 @@ use TravelMap\Entity\ExternalProfile;
  * implement this interface and register it in the AppProvider
  */
 interface ProviderInterface {
+
+    public function getIdentifier();
 
     public function getAuthUrl();
 

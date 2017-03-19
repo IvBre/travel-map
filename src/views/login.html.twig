@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+
+    <ul>
+        {% for name, message in providers %}
+            <li><a href="{{ path('authenticate', {'p': name}) }}">{{ message }}</a></li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

@@ -5,12 +5,10 @@
  * Time: 5:34 PM
  */
 
-namespace TravelMap\Provider;
+namespace TravelMap\Provider\Authentication;
 
 use Google_Service_Calendar;
-use Symfony\Component\HttpFoundation\Request;
 use TravelMap\Entity\ExternalProfile;
-use TravelMap\Entity\User;
 use TravelMap\ValueObject\Email;
 use TravelMap\ValueObject\Name;
 
@@ -30,9 +28,13 @@ final class GoogleOauth2Provider implements ProviderInterface {
             \Google_Service_Oauth2::USERINFO_EMAIL,
             \Google_Service_Calendar::CALENDAR_READONLY
         ]);
-        $this->client->setRedirectUri($baseUrl . '/login');
+        $this->client->setRedirectUri($baseUrl . '/authenticate?p=' . $this->getIdentifier());
         $this->client->setAccessType("offline");
         $this->client->setIncludeGrantedScopes(true);
+    }
+
+    public function getIdentifier() {
+        return 'google';
     }
 
     /**
@@ -66,7 +68,7 @@ final class GoogleOauth2Provider implements ProviderInterface {
     /** @inheritdoc */
     public function getUserInfo() {
         $plus = new \Google_Service_Oauth2($this->client);
-        $plusProfile =  $plus->userinfo->get("me");
+        $plusProfile =  $plus->userinfo->get();
 
         $externalProfile = new ExternalProfile(
             new Email($plusProfile->getEmail()),

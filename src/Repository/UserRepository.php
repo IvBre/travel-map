@@ -30,7 +30,7 @@ final class UserRepository {
     public function getUserByEmail(Email $email) {
         //check if user exists
         $query = <<<SQL
-SELECT id, access_token, email, first_name, last_name
+SELECT id, access_token, email, first_name, last_name, created, updated
 FROM user
 WHERE email = ?
 SQL;
@@ -80,7 +80,7 @@ SQL;
             'access_token' => $user->getAccessToken(),
             'first_name' => $user->getFirstName(),
             'last_name' => $user->getLastName(),
-            'updated' => $user->getUpdated()
+            'updated' => (new \DateTime())->format('Y-m-d H:i:s')
         ], [
             'id' => $user->getId()
         ]);

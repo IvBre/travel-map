@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+            <link rel="stylesheet" href="css/style.css" />
+            <title>{% block title %}{% endblock %} - Travel map</title>
+        {% endblock %}
+    </head>
+    <body>
+        <content>{% block content %}{% endblock %}</content>
+        <footer>
+            {% block footer %}
+                &copy; Copyright
+            {% endblock %}
+        </footer>
+    </body>
+</html>

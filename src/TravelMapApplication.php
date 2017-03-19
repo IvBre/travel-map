@@ -8,6 +8,7 @@
 namespace TravelMap;
 
 use Silex\Application;
+use Silex\Provider\TwigServiceProvider;
 use TravelMap\Provider\AppProvider;
 use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
@@ -31,15 +32,25 @@ final class TravelMapApplication extends Application {
                 'login' => [
                     'pattern' => '^/login$',
                 ],
+                'authenticate' => [
+                    'pattern' => '^/authenticate$',
+                ],
                 'secured_area' => [
                     'pattern' => '^.*$',
-                    'form' => [ 'login_path' => '/login', 'check_path' => '/login_check' ],
+                    'form' => [ 'login_path' => '/login', 'check_path' => '/authenticate' ],
                     'logout' => [
                         'logout_path' => '/logout',
                     ],
                 ]
-            ]
+            ],
+            'security.access_rules' => [
+                ['^.*$', 'ROLE_USER'],
+            ],
         ]);
+
+        $this->register(new TwigServiceProvider(), array(
+            'twig.path' => __DIR__.'/views',
+        ));
 
         $this->register(new AppProvider());
     }

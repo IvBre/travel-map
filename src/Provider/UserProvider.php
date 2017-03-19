@@ -5,7 +5,7 @@
  * Time: 9:55 PM
  */
 
-namespace TravelMap;
+namespace TravelMap\Provider;
 
 use Doctrine\DBAL\Connection;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;

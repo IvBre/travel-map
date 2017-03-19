@@ -7,7 +7,6 @@
 
 namespace TravelMap\Controller;
 
-use Google_Service_Calendar;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,15 +14,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use TravelMap\Entity\User;
-use TravelMap\Provider\ProviderInterface;
+use TravelMap\Provider\Authentication\AuthenticationProviderFactory;
 use TravelMap\Repository\UserRepository;
 use TravelMap\ValueObject\AccessToken;
 
 final class Main {
 
     public function index(Application $app) {
-        /** @var ProviderInterface $loginProvider */
-        $loginProvider = $app['provider.google_oauth2'];
+        /** @var AuthenticationProviderFactory $providerFactory */
+        $providerFactory = $app['provider.factory'];
+        $loginProvider = $providerFactory->getProviderByIdentifier('google');
 
         $events = $loginProvider->getUserEvents();
 
@@ -31,8 +31,17 @@ final class Main {
     }
 
     public function login(Request $request, Application $app) {
-        /** @var ProviderInterface $loginProvider */
-        $loginProvider = $app['provider.google_oauth2'];
+        return $app['twig']->render('login.html.twig', [
+            'providers' => [
+                'google' => 'Log in with Google',
+            ]
+        ]);
+    }
+
+    public function authenticate(Request $request, Application $app) {
+        /** @var AuthenticationProviderFactory $providerFactory */
+        $providerFactory = $app['provider.factory'];
+        $loginProvider = $providerFactory->getProviderByIdentifier($request->query->get('p'));
 
         if ($request->query->has('code')) {
             $accessToken = $loginProvider->getAccessToken($request->query->get('code'));
@@ -57,7 +66,9 @@ final class Main {
                 $userRepository->updateUser($user);
             }
 
-            $token = new UsernamePasswordToken($user, null, "secured_area");
+            //$app['security.token_storage']->setToken(new UsernamePasswordToken($user, 'dummy', 'secured_area', ['ROLE_USER']));
+
+            $token = new UsernamePasswordToken($user, 'dummy', 'secured_area', ['ROLE_USER']);
             $app["security.token_storage"]->setToken($token); //now the user is logged in
 
             //now dispatch the login event
@@ -68,8 +79,8 @@ final class Main {
             $authUrl = $loginProvider->getAuthUrl();
             return new RedirectResponse($authUrl);
         }
-
-        return new RedirectResponse('/');
+        return new Response('test');
+        //return new RedirectResponse('/');
     }
 
     public function logout() {
