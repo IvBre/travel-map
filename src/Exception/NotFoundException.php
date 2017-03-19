@@ -1,14 +1,12 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: ivana
- * Date: 1/25/17
- * Time: 10:08 PM
+ * Author: Ivana Petrovic <petrovivana@gmail.com>
+ * Date: 3/19/17
+ * Time: 5:34 PM
  */
 
 namespace TravelMap\Exception;
 
-class NotFoundException extends \Exception
-{
+final class NotFoundException extends \Exception {
 
 }

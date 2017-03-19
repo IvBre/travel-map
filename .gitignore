@@ -1,3 +1,4 @@
 /vendor/
 
-/app/google_oauth2_client_secret.json
+/app/config/db.php
+/app/config/google/google_oauth2_client_secret.json

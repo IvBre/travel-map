@@ -1,16 +1,15 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: ivana
- * Date: 1/25/17
- * Time: 9:43 PM
+ * Author: Ivana Petrovic <petrovivana@gmail.com>
+ * Date: 3/19/17
+ * Time: 5:34 PM
  */
 
 namespace TravelMap;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class GoogleOauth2Provider {
+final class GoogleOauth2Provider {
 
     /** @var \Google_Client */
     private $client;

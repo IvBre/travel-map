@@ -1,4 +1,9 @@
 <?php
+/**
+ * Author: Ivana Petrovic <petrovivana@gmail.com>
+ * Date: 3/19/17
+ * Time: 5:34 PM
+ */
 
 namespace TravelMap\Controller;
 
@@ -13,7 +18,7 @@ use TravelMap\Entity\User;
 use TravelMap\GoogleOauth2Provider;
 use TravelMap\UserProvider;
 
-class Main {
+final class Main {
 
     public function index(Request $request, Application $app) {
         $loginProvider = new GoogleOauth2Provider($app['google_client_secret']);

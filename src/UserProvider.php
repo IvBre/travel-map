@@ -18,7 +18,7 @@ use TravelMap\ValueObject\DateTime;
 use TravelMap\ValueObject\Email;
 use TravelMap\ValueObject\Name;
 
-class UserProvider implements UserProviderInterface {
+final class UserProvider implements UserProviderInterface {
 
     /** @var Connection */
     private $conn;
