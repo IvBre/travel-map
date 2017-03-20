@@ -12,7 +12,6 @@ use Doctrine\DBAL\Connection;
 use Prophecy\Argument;
 use TravelMap\Entity\User;
 use TravelMap\Repository\UserRepository;
-use TravelMap\ValueObject\AccessToken;
 use TravelMap\ValueObject\DateTime;
 use TravelMap\ValueObject\Email;
 use TravelMap\ValueObject\Name;
@@ -32,10 +31,8 @@ final class UserRepositoryTest extends TestCase {
 
         $user = new User(
             123456,
-            new AccessToken('alksdjalkj43kl5h4kj56hj45'),
             $email,
-            new Name('John'),
-            new Name('Smith'),
+            new Name('John Smith'),
             new DateTime(date('Y-m-d H:i:s')),
             new DateTime(date('Y-m-d H:i:s'))
         );
@@ -44,12 +41,10 @@ final class UserRepositoryTest extends TestCase {
         $db->fetchAssoc(Argument::any(), [ $email ])
             ->willReturn([
                 'id' => $user->getId(),
-                'access_token' => $user->getAccessToken(),
-                'email' => $user->getEmail(),
-                'first_name' => $user->getFirstName(),
-                'last_name' => $user->getLastName(),
-                'created' => $user->getCreated(),
-                'updated' => $user->getUpdated()
+                'email' => (string) $user->getEmail(),
+                'full_name' => (string) $user->getFullName(),
+                'created' => (string) $user->getCreated(),
+                'updated' => (string) $user->getUpdated()
             ]);
         $repository = new UserRepository($db->reveal());
 
@@ -63,27 +58,30 @@ final class UserRepositoryTest extends TestCase {
      * @covers ::createUser
      */
     public function testCreateUser() {
+        $email = new Email('test@dummy.com');
+        $name = new Name('John Smith');
+        $created = new DateTime(date('Y-m-d H:i:s'));
         $user = new User(
-            null,
-            new AccessToken('alksdjalkj43kl5h4kj56hj45'),
-            new Email('test@dummy.com'),
-            new Name('John'),
-            new Name('Smith')
+            123456,
+            $email,
+            $name,
+            $created
         );
 
         $db = $this->prophesize(Connection::class);
         $db->insert('user', [
-            'email' => $user->getEmail(),
-            'access_token' => $user->getAccessToken(),
-            'first_name' => $user->getFirstName(),
-            'last_name' => $user->getLastName(),
+            'email' => $email,
+            'full_name' => $name,
+            'created' => $created
         ])
             ->willReturn(1);
+        $db->lastInsertId()
+            ->willReturn($user->getId());
         $repository = new UserRepository($db->reveal());
 
-        $result = $repository->createUser($user);
+        $result = $repository->createUser($email, $name);
 
-        $this->assertSame(1, $result);
+        $this->assertEquals($user, $result);
     }
 
     /**
@@ -91,19 +89,19 @@ final class UserRepositoryTest extends TestCase {
      * @covers ::updateUser
      */
     public function testUpdateUser() {
+        $email = new Email('test@dummy.com');
+        $name = new Name('John Smith');
         $user = new User(
             123456,
-            new AccessToken('alksdjalkj43kl5h4kj56hj45'),
-            new Email('test@dummy.com'),
-            new Name('John'),
-            new Name('Smith')
+            $email,
+            $name,
+            new DateTime(date('Y-m-d H:i:s')),
+            new DateTime(date('Y-m-d H:i:s'))
         );
 
         $db = $this->prophesize(Connection::class);
         $db->update('user', [
-            'access_token' => $user->getAccessToken(),
-            'first_name' => $user->getFirstName(),
-            'last_name' => $user->getLastName(),
+            'full_name' => (string) $user->getFullName(),
             'updated' => (new \DateTime())->format('Y-m-d H:i:s')
         ], [
             'id' => $user->getId()
@@ -111,8 +109,8 @@ final class UserRepositoryTest extends TestCase {
             ->willReturn(1);
         $repository = new UserRepository($db->reveal());
 
-        $result = $repository->updateUser($user);
+        $result = $repository->updateUser($user, $name);
 
-        $this->assertSame(1, $result);
+        $this->assertEquals($user, $result);
     }
 }
