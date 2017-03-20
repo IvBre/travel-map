@@ -11,6 +11,7 @@ use Gigablah\Silex\OAuth\OAuthServiceProvider;
 use Silex\Application;
 use Silex\Provider\FormServiceProvider;
 use Silex\Provider\TwigServiceProvider;
+use Symfony\Component\Form\Exception\InvalidConfigurationException;
 use Symfony\Component\HttpFoundation\Request;
 use TravelMap\Provider\AppProvider;
 use Silex\Provider\DoctrineServiceProvider;
@@ -105,7 +106,12 @@ final class TravelMapApplication extends Application {
             'google_client_secret' => '../app/config/google/google_oauth2_client_secret.json',
         ];
 
-        $default = array_merge($default, require_once($default['app_config_path'] . "/parameters.php"));
+        $parameters = json_decode(file_get_contents($default['app_config_path'] . "/parameters.json"), true);
+        if ($parameters === null) {
+            throw new InvalidConfigurationException("parameters.json file is missing fromt he config folder.");
+        }
+
+        $default = array_merge($default, $parameters);
 
         return array_merge($default, $values);
     }
