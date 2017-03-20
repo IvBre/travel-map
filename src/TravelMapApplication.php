@@ -36,7 +36,7 @@ final class TravelMapApplication extends Application {
         $this->register(new SessionServiceProvider());
 
         $this->register(new TwigServiceProvider(), [
-            'twig.path' => __DIR__.'/views',
+            'twig.path' => __DIR__ . '/Views',
         ]);
 
         $this->register(new OAuthServiceProvider(), array(

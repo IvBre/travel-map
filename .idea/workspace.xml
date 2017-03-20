@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3325d67b-5bd6-49b6-927e-3ed4f6b7b667" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/unit/Repository/UserRepositoryTest.php" afterPath="$PROJECT_DIR$/test/unit/Repository/UserRepositoryTest.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/views/base.html.twig" afterPath="$PROJECT_DIR$/src/Views/base.html.twig" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/views/index.html.twig" afterPath="$PROJECT_DIR$/src/Views/index.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -45,8 +46,8 @@
       <file leaf-file-name="UserRepositoryTest.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/unit/Repository/UserRepositoryTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1410">
-              <caret line="94" column="19" lean-forward="true" selection-start-line="94" selection-start-column="19" selection-end-line="94" selection-end-column="19" />
+            <state relative-caret-position="390">
+              <caret line="26" column="7" lean-forward="true" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
               <folding>
                 <element signature="e#6#97#0#PHP" expanded="true" />
                 <element signature="e#137#168#0#PHP" expanded="true" />
@@ -271,42 +272,6 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="travel-map" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="travel-map" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Repository" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="travel-map" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="travel-map" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="Controller" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -511,7 +476,7 @@
       <workItem from="1489339078717" duration="146000" />
       <workItem from="1489339244775" duration="275000" />
       <workItem from="1489520831854" duration="8523000" />
-      <workItem from="1489922042032" duration="36996000" />
+      <workItem from="1489922042032" duration="37191000" />
     </task>
     <servers />
   </component>
@@ -548,7 +513,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62360000" />
+    <option name="totallyTimeSpent" value="62555000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -913,7 +878,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/base.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/Views/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="16" column="7" lean-forward="true" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
@@ -929,7 +894,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/index.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/Views/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="4" />
@@ -1050,8 +1015,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/unit/Repository/UserRepositoryTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1410">
-          <caret line="94" column="19" lean-forward="true" selection-start-line="94" selection-start-column="19" selection-end-line="94" selection-end-column="19" />
+        <state relative-caret-position="390">
+          <caret line="26" column="7" lean-forward="true" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
           <folding>
             <element signature="e#6#97#0#PHP" expanded="true" />
             <element signature="e#137#168#0#PHP" expanded="true" />
