@@ -8,26 +8,23 @@
 namespace TravelMap\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
-use TravelMap\ValueObject\AccessToken;
 use TravelMap\ValueObject\DateTime;
 use TravelMap\ValueObject\Email;
 use TravelMap\ValueObject\Name;
 
 final class User implements UserInterface {
 
+    /** @var int */
     private $id;
 
-    /** @var AccessToken */
-    private $accessToken;
+    /** @var OAuthToken */
+    private $oauth;
 
     /** @var Email */
     private $email;
 
     /** @var Name */
-    private $firstName;
-
-    /** @var Name */
-    private $lastName;
+    private $fullName;
 
     /** @var DateTime */
     private $created;
@@ -36,25 +33,20 @@ final class User implements UserInterface {
     private $updated;
 
     public function __construct(
-        $id = null,
-        AccessToken $accessToken,
+        $id,
         Email $email,
-        Name $firstName,
-        Name $lastName,
-        DateTime $created = null,
+        Name $fullName,
+        DateTime $created,
         DateTime $updated = null
     ) {
         $this->id = $id;
-        $this->accessToken = $accessToken;
         $this->email = $email;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
+        $this->fullName = $fullName;
         $this->created = $created;
         $this->updated = $updated;
     }
 
-    public function __toString()
-    {
+    public function __toString() {
         return (string) $this->getEmail();
     }
 
@@ -62,20 +54,16 @@ final class User implements UserInterface {
         return $this->id;
     }
 
-    public function getAccessToken() {
-        return $this->accessToken;
+    public function getOAuth() {
+        return $this->oauth;
     }
 
     public function getEmail() {
         return $this->email;
     }
 
-    public function getFirstName() {
-        return $this->firstName;
-    }
-
-    public function getLastName() {
-        return $this->lastName;
+    public function getFullName() {
+        return $this->fullName;
     }
 
     public function getCreated() {
@@ -108,7 +96,10 @@ final class User implements UserInterface {
     }
 
     /** @inheritdoc */
-    public function eraseCredentials() {
+    public function eraseCredentials() {}
 
+    /** @param OAuthToken */
+    public function setOAuth(OAuthToken $oauth) {
+        $this->oauth = $oauth;
     }
 }

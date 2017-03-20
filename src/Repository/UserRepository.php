@@ -9,7 +9,6 @@ namespace TravelMap\Repository;
 
 use Doctrine\DBAL\Connection;
 use TravelMap\Entity\User;
-use TravelMap\ValueObject\AccessToken;
 use TravelMap\ValueObject\DateTime;
 use TravelMap\ValueObject\Email;
 use TravelMap\ValueObject\Name;
@@ -30,59 +29,71 @@ final class UserRepository {
     public function getUserByEmail(Email $email) {
         //check if user exists
         $query = <<<SQL
-SELECT id, access_token, email, first_name, last_name, created, updated
+SELECT id, email, full_name, created, updated
 FROM user
 WHERE email = ?
 SQL;
-        $user = $this->db->fetchAssoc($query, [ $email ]);
+        $user = $this->db->fetchAssoc($query, [ (string) $email ]);
 
         if (!$user) {
             return null;
         }
 
-        $accessToken = new AccessToken($user['access_token']);
-        $email = new Email($user['email']);
-        $firstName = new Name($user['first_name']);
-        $lastName = new Name($user['last_name']);
+        $fullName = new Name($user['full_name']);
         $created = new DateTime($user['created']);
         $updated = new DateTime($user['updated']);
 
         return new User(
             $user['id'],
-            $accessToken,
             $email,
-            $firstName,
-            $lastName,
+            $fullName,
             $created,
             $updated
         );
     }
 
     /**
-     * @param User $user
-     * @return int
+     * @param Email $email
+     * @param Name $fullName
+     * @return User
      */
-    public function createUser(User $user) {
-        return $this->db->insert('user', [
-            'email' => $user->getEmail(),
-            'access_token' => $user->getAccessToken(),
-            'first_name' => $user->getFirstName(),
-            'last_name' => $user->getLastName(),
+    public function createUser(Email $email, Name $fullName) {
+        $created = new DateTime(date('Y-m-d H:i:s'));
+        $this->db->insert('user', [
+            'email' => $email,
+            'full_name' => $fullName,
+            'created' => $created,
         ]);
+        $userId = $this->db->lastInsertId();
+
+        return new User(
+            $userId,
+            $email,
+            $fullName,
+            $created
+        );
     }
 
     /**
      * @param User $user
-     * @return int
+     * @param Name $fullName
+     * @return User
      */
-    public function updateUser(User $user) {
-        return $this->db->update('user', [
-            'access_token' => $user->getAccessToken(),
-            'first_name' => $user->getFirstName(),
-            'last_name' => $user->getLastName(),
-            'updated' => (new \DateTime())->format('Y-m-d H:i:s')
+    public function updateUser(User $user, Name $fullName) {
+        $dateTime = (new \DateTime())->format('Y-m-d H:i:s');
+        $this->db->update('user', [
+            'full_name' => $fullName,
+            'updated' => $dateTime
         ], [
             'id' => $user->getId()
         ]);
+
+        return new User(
+            $user->getId(),
+            $user->getEmail(),
+            $fullName,
+            $user->getCreated(),
+            new DateTime($dateTime)
+        );
     }
 }

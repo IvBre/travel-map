@@ -1,0 +1,13 @@
+<?php
+return [
+    'db' => [
+        'host' => '<database host>',
+        'dbname' => '<database name>',
+        'user' => '<database username>',
+        'password' => '<database password>',
+    ],
+    'google' => [
+        'client_id' => '<client id that you recieved from Google API Console>',
+        'client_secret' => '<client secret that you recieved from Google API Console>',
+    ],
+];

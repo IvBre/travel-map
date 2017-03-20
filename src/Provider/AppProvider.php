@@ -9,8 +9,7 @@ namespace TravelMap\Provider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use TravelMap\Provider\Authentication\AuthenticationProviderFactory;
-use TravelMap\Provider\Authentication\GoogleOauth2Provider;
+use TravelMap\Repository\OAuthTokenRepository;
 use TravelMap\Repository\UserRepository;
 
 final class AppProvider implements ServiceProviderInterface {
@@ -22,20 +21,12 @@ final class AppProvider implements ServiceProviderInterface {
             return new UserRepository($app['db']);
         };
 
+        $app['repository.oauth_token'] = function () use ($app) {
+            return new OAuthTokenRepository($app['db']);
+        };
+
         $app['users'] = function () use ($app) {
-            return new UserProvider($app['repository.user']);
-        };
-
-        // ----------------   Providers   ---------------- //
-        $app['provider.google_oauth2'] = function () use ($app) {
-            return new GoogleOauth2Provider($app['google_client_secret'], $app['base_url']);
-        };
-
-        $app['provider.factory'] = function() use($app) {
-            $factory = new AuthenticationProviderFactory();
-            $factory->addProvider($app['provider.google_oauth2']);
-
-            return $factory;
+            return new UserProvider($app['repository.user'], $app['repository.oauth_token']);
         };
     }
 }

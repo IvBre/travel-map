@@ -16,6 +16,7 @@ final class Name {
      * @param string $name
      */
     public function __construct($name) {
+        assert(is_string($name), "Name needs to be a string");
         $this->name = $name;
     }
 

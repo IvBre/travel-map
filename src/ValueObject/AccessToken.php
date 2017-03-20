@@ -11,6 +11,7 @@ final class AccessToken {
      * @param string $accessToken
      */
     public function __construct($accessToken) {
+        assert(is_string($accessToken), "Access token needs to be a string");
         $this->accessToken = $accessToken;
     }
 
