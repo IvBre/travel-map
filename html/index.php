@@ -8,6 +8,7 @@ $app = new TravelMapApplication();
 $app['debug'] = true;
 
 $app->get('/', 'TravelMap\\Controller\\Main::index');
+$app->get('/import', 'TravelMap\\Controller\\Main::import');
 
 $app->match('/logout', function () {
 })->bind('logout');

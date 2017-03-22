@@ -39,6 +39,9 @@ final class UserProvider implements UserProviderInterface, OAuthUserProviderInte
             throw new UsernameNotFoundException(sprintf('Email "%s" does not exist.', $username));
         }
 
+        $oauthToken = $this->oAuthTokenRepository->getLastUsedOAuthToken($user->getId());
+        $user->setOAuth($oauthToken);
+
         return $user;
     }
 
@@ -79,8 +82,11 @@ final class UserProvider implements UserProviderInterface, OAuthUserProviderInte
         $oauthToken = $this->oAuthTokenRepository->getOAuthToken($user->getId(), $token);
         if ($oauthToken === null) {
             $oauthToken = $this->oAuthTokenRepository->createOAuthToken($user->getId(), $token);
-            $user->setOAuth($oauthToken);
+        } else {
+            $oauthToken = $this->oAuthTokenRepository->updateOAuthToken($user->getId(), $oauthToken);
         }
+
+        $user->setOAuth($oauthToken);
 
         return $user;
     }

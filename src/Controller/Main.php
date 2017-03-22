@@ -7,8 +7,13 @@
 
 namespace TravelMap\Controller;
 
+use Google_Client;
+use Google_Service_Calendar;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use TravelMap\Entity\User;
+use TravelMap\Importer\ImporterInterface;
 
 final class Main {
 
@@ -21,5 +26,14 @@ final class Main {
             )),
             'error' => $app['security.last_error']($request)
         ));
+    }
+
+    public function import(Application $app) {
+        /** @var ImporterInterface $user */
+        $importer = $app['importer.google'];
+
+        $events = $importer->execute();
+
+        return new Response('test');
     }
 }

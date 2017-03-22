@@ -26,13 +26,71 @@ final class OAuthToken {
     private $accessToken;
 
     /** @var DateTime */
+    private $expiresOn;
+
+    /** @var DateTime */
     private $created;
 
-    public function __construct($id, $userId, Service $service, AccessToken $accessToken, DateTime $created) {
+    /** @var DateTime */
+    private $lastTimeUsed;
+
+    public function __construct(
+        $id,
+        $userId,
+        Service $service,
+        AccessToken $accessToken,
+        DateTime $expiresOn,
+        DateTime $created,
+        DateTime $lastTimeUsed = null
+    ) {
         $this->id = $id;
         $this->userId = $userId;
         $this->service = $service;
         $this->accessToken = $accessToken;
+        $this->expiresOn = $expiresOn;
         $this->created = $created;
+        $this->lastTimeUsed = $lastTimeUsed;
+    }
+
+    /** @return int */
+    public function getId() {
+        return $this->id;
+    }
+
+    /** @return Service */
+    public function getService() {
+        return $this->service;
+    }
+
+    /** @return AccessToken */
+    public function getAccessToken() {
+        return $this->accessToken;
+    }
+
+    /** @return DateTime */
+    public function getExpiresOn() {
+        return $this->expiresOn;
+    }
+
+    /** @return DateTime */
+    public function getCreated() {
+        return $this->created;
+    }
+
+    /** @return DateTime */
+    public function getLastTimeUsed() {
+        return $this->lastTimeUsed;
+    }
+
+    /** @return array */
+    public function getCredentials() {
+        $now = new \DateTime();
+        $diff = $now->diff($this->expiresOn->getDateTime());
+        return [
+            'access_token' => (string) $this->accessToken,
+            'expires_in' => $diff->format('U'),
+            'expires_on' => (string) $this->expiresOn,
+            'issued_at' => (string) $this->created,
+        ];
     }
 }

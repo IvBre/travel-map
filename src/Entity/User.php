@@ -54,6 +54,7 @@ final class User implements UserInterface {
         return $this->id;
     }
 
+    /** @return OAuthToken */
     public function getOAuth() {
         return $this->oauth;
     }
