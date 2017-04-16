@@ -29,7 +29,7 @@ final class UserRepository {
     public function getUserByEmail(Email $email) {
         //check if user exists
         $query = <<<SQL
-SELECT id, email, full_name, created, updated
+SELECT id, full_name, created, updated
 FROM user
 WHERE email = ?
 SQL;

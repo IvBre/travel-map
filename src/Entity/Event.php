@@ -15,6 +15,14 @@ use TravelMap\ValueObject\Url;
 
 final class Event {
 
-    public function __construct($id, Name $location, Coordinates $coordinates, DateTime $start, DateTime $end, Url $link, Text $summary, Text $attendees) {
+    public function __construct(
+        $id,
+        Name $location,
+        Coordinates $coordinates,
+        DateTime $start,
+        DateTime $end,
+        Url $link,
+        Text $summary,
+        Text $attendees) {
     }
 }

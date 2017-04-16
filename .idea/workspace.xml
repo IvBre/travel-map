@@ -2,22 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3325d67b-5bd6-49b6-927e-3ed4f6b7b667" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Entity/Event.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Importer/GoogleImporter.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Importer/ImporterInterface.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Repository/EventRepository.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ValueObject/Coordinates.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ValueObject/Text.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ValueObject/Url.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/travel-map.iml" afterPath="$PROJECT_DIR$/.idea/travel-map.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/Entity/OAuthTokenTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/Entity/UserTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/ValueObject/AccessTokenTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/ValueObject/CoordinatesTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/ValueObject/DateTimeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/ValueObject/EmailTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/ValueObject/NameTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/ValueObject/ServiceTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/ValueObject/TextTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/unit/ValueObject/UrlTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/index.php" afterPath="$PROJECT_DIR$/html/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/phpunit.xml" afterPath="$PROJECT_DIR$/phpunit.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/Main.php" afterPath="$PROJECT_DIR$/src/Controller/Main.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/OAuthToken.php" afterPath="$PROJECT_DIR$/src/Entity/OAuthToken.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/User.php" afterPath="$PROJECT_DIR$/src/Entity/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/Event.php" afterPath="$PROJECT_DIR$/src/Entity/Event.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Importer/GoogleImporter.php" afterPath="$PROJECT_DIR$/src/Importer/GoogleImporter.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Provider/AppProvider.php" afterPath="$PROJECT_DIR$/src/Provider/AppProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Provider/UserProvider.php" afterPath="$PROJECT_DIR$/src/Provider/UserProvider.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Repository/OAuthTokenRepository.php" afterPath="$PROJECT_DIR$/src/Repository/OAuthTokenRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Repository/EventRepository.php" afterPath="$PROJECT_DIR$/src/Repository/EventRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ValueObject/DateTime.php" afterPath="$PROJECT_DIR$/src/ValueObject/DateTime.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ValueObject/Email.php" afterPath="$PROJECT_DIR$/src/ValueObject/Email.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ValueObject/Url.php" afterPath="$PROJECT_DIR$/src/ValueObject/Url.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/unit/Repository/UserRepositoryTest.php" afterPath="$PROJECT_DIR$/test/unit/Repository/UserRepositoryTest.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -47,8 +54,8 @@
       <file leaf-file-name="Main.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/Main.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="34" column="15" lean-forward="false" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="15" />
+            <state relative-caret-position="246">
+              <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding>
                 <element signature="e#6#97#0#PHP" expanded="true" />
                 <element signature="e#132#150#0#PHP" expanded="true" />
@@ -57,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GoogleImporter.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GoogleImporter.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Importer/GoogleImporter.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="60" column="8" lean-forward="true" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="21" />
+            <state relative-caret-position="417">
+              <caret line="45" column="11" lean-forward="true" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
               <folding>
                 <element signature="e#130#148#0#PHP" expanded="true" />
               </folding>
@@ -69,35 +76,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Coordinates.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ValueObject/Coordinates.php">
+      <file leaf-file-name="Event.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/google/apiclient-services/src/Google/Service/Calendar/Event.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="25" column="32" lean-forward="false" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
+            <state relative-caret-position="134">
+              <caret line="241" column="18" lean-forward="false" selection-start-line="241" selection-start-column="18" selection-end-line="241" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EventRepository.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EventRepository.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Repository/EventRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="34" column="20" lean-forward="false" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
+            <state relative-caret-position="75">
+              <caret line="33" column="82" lean-forward="false" selection-start-line="33" selection-start-column="82" selection-end-line="33" selection-end-column="82" />
               <folding>
-                <element signature="e#132#161#0#PHP" expanded="true" />
+                <marker date="1492330715000" expanded="true" signature="729:841" ph="SELECT id, s... user" />
+                <marker date="1492330715000" expanded="true" signature="729:875" ph="SELECT id, s... event" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Event.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Event.php">
+      <file leaf-file-name="UserRepository.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Repository/UserRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="17" column="65" lean-forward="false" selection-start-line="17" selection-start-column="65" selection-end-line="17" selection-end-column="65" />
+            <state relative-caret-position="165">
+              <caret line="39" column="9" lean-forward="false" selection-start-line="30" selection-start-column="8" selection-end-line="39" selection-end-column="9" />
               <folding>
-                <element signature="e#128#166#0#PHP" expanded="true" />
+                <marker date="1492327901000" expanded="true" signature="622:686" ph="SELECT id, a... user" />
               </folding>
             </state>
           </provider>
@@ -106,22 +114,9 @@
       <file leaf-file-name="AppProvider.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Provider/AppProvider.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="35" column="31" lean-forward="false" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
+            <state relative-caret-position="298">
+              <caret line="40" column="59" lean-forward="false" selection-start-line="40" selection-start-column="59" selection-end-line="40" selection-end-column="59" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserRepository.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Repository/UserRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="66" column="44" lean-forward="true" selection-start-line="61" selection-start-column="8" selection-end-line="66" selection-end-column="44" />
-              <folding>
-                <element signature="e#132#161#0#PHP" expanded="true" />
-                <marker date="1490046227000" expanded="true" signature="622:693" ph="SELECT id, a... user" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -164,19 +159,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/setup/php/Dockerfile" />
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/src/ValueObject/DateTime.php" />
-        <option value="$PROJECT_DIR$/src/GoogleOauth2Provider.php" />
-        <option value="$PROJECT_DIR$/src/Exception/NotFoundException.php" />
-        <option value="$PROJECT_DIR$/app/config/db.php" />
-        <option value="$PROJECT_DIR$/app/config/db.php.dist" />
-        <option value="$PROJECT_DIR$/src/Entity/ExternalProfile.php" />
-        <option value="$PROJECT_DIR$/phpunit.xml" />
-        <option value="$PROJECT_DIR$/src/ValueObject/Email.php" />
-        <option value="$PROJECT_DIR$/src/UserProvider.php" />
-        <option value="$PROJECT_DIR$/src/Provider/GoogleOauth2Provider.php" />
-        <option value="$PROJECT_DIR$/src/Provider/ProviderInterface.php" />
         <option value="$PROJECT_DIR$/vendor/silex/silex/src/Silex/Application.php" />
         <option value="$PROJECT_DIR$/setup/php/php.ini" />
         <option value="$PROJECT_DIR$/src/views/css/style.css" />
@@ -192,28 +174,41 @@
         <option value="$PROJECT_DIR$/src/ValueObject/AccessToken.php" />
         <option value="$PROJECT_DIR$/src/ValueObject/Name.php" />
         <option value="$PROJECT_DIR$/src/ValueObject/Service.php" />
-        <option value="$PROJECT_DIR$/src/Repository/UserRepository.php" />
         <option value="$PROJECT_DIR$/src/ValueObject/OAuth.php" />
         <option value="$PROJECT_DIR$/src/views/base.html.twig" />
         <option value="$PROJECT_DIR$/app/config/parameters.php" />
         <option value="$PROJECT_DIR$/app/config/parameters.json" />
         <option value="$PROJECT_DIR$/app/config/parameters.json.dist" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/TravelMapApplication.php" />
-        <option value="$PROJECT_DIR$/test/unit/Repository/UserRepositoryTest.php" />
         <option value="$PROJECT_DIR$/src/Entity/User.php" />
         <option value="$PROJECT_DIR$/html/index.php" />
         <option value="$PROJECT_DIR$/src/Provider/UserProvider.php" />
         <option value="$PROJECT_DIR$/src/Repository/OAuthTokenRepository.php" />
         <option value="$PROJECT_DIR$/src/Entity/OAuthToken.php" />
         <option value="$PROJECT_DIR$/src/Importer/ImporterInterface.php" />
-        <option value="$PROJECT_DIR$/src/Provider/AppProvider.php" />
-        <option value="$PROJECT_DIR$/src/ValueObject/Url.php" />
         <option value="$PROJECT_DIR$/src/ValueObject/Text.php" />
         <option value="$PROJECT_DIR$/src/ValueObject/Coordinates.php" />
         <option value="$PROJECT_DIR$/src/Entity/Event.php" />
-        <option value="$PROJECT_DIR$/src/Repository/EventRepository.php" />
         <option value="$PROJECT_DIR$/src/Controller/Main.php" />
+        <option value="$PROJECT_DIR$/test/unit/Entity/OAuthTokenTest.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/test/unit/ValueObject/AccessTokenTest.php" />
+        <option value="$PROJECT_DIR$/test/unit/Entity/UserTest.php" />
+        <option value="$PROJECT_DIR$/test/unit/ValueObject/CoordinatesTest.php" />
+        <option value="$PROJECT_DIR$/phpunit.xml" />
+        <option value="$PROJECT_DIR$/src/ValueObject/DateTime.php" />
+        <option value="$PROJECT_DIR$/test/unit/ValueObject/DateTimeTest.php" />
+        <option value="$PROJECT_DIR$/src/ValueObject/Email.php" />
+        <option value="$PROJECT_DIR$/test/unit/ValueObject/EmailTest.php" />
+        <option value="$PROJECT_DIR$/test/unit/ValueObject/NameTest.php" />
+        <option value="$PROJECT_DIR$/test/unit/ValueObject/ServiceTest.php" />
+        <option value="$PROJECT_DIR$/test/unit/ValueObject/TextTest.php" />
+        <option value="$PROJECT_DIR$/test/unit/ValueObject/UrlTest.php" />
+        <option value="$PROJECT_DIR$/src/ValueObject/Url.php" />
+        <option value="$PROJECT_DIR$/src/Repository/UserRepository.php" />
+        <option value="$PROJECT_DIR$/test/unit/Repository/UserRepositoryTest.php" />
+        <option value="$PROJECT_DIR$/src/Repository/EventRepository.php" />
+        <option value="$PROJECT_DIR$/src/Provider/AppProvider.php" />
         <option value="$PROJECT_DIR$/src/Importer/GoogleImporter.php" />
       </list>
     </option>
@@ -267,8 +262,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -291,7 +286,11 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="unit" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -399,7 +398,7 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Importer" />
+              <option name="myItemId" value="Entity" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -413,11 +412,25 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
+              <option name="myItemId" value="log" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="travel-map" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="travel-map" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Entity" />
+              <option name="myItemId" value="log" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="codeCoverage" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -483,6 +496,11 @@
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test/unit/ValueObject" />
+      <recent name="$PROJECT_DIR$/app/config" />
+      <recent name="$PROJECT_DIR$/app" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/html" />
       <recent name="$PROJECT_DIR$/src/Provider" />
@@ -490,18 +508,26 @@
       <recent name="$PROJECT_DIR$/test/unit/Repository" />
       <recent name="$PROJECT_DIR$/app/config/google" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/config" />
-      <recent name="$PROJECT_DIR$/app" />
-    </key>
   </component>
   <component name="RunManager" selected="PHP Web Application.travel-map">
-    <configuration default="false" name="UserRepositoryTest.testCreateUser" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="TravelMap\Test\Repository\UserRepositoryTest" file="$PROJECT_DIR$/test/unit/Repository/UserRepositoryTest.php" method="testCreateUser" scope="Method" />
-      <method />
-    </configuration>
     <configuration default="false" name="UserRepositoryTest.testGetUserByEmail" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="TravelMap\Test\Repository\UserRepositoryTest" file="$PROJECT_DIR$/test/unit/Repository/UserRepositoryTest.php" method="testGetUserByEmail" scope="Method" />
+      <method />
+    </configuration>
+    <configuration default="false" name="UserTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="TravelMap\Entity\UserTest" file="$PROJECT_DIR$/test/unit/Entity/UserTest.php" scope="Class" />
+      <method />
+    </configuration>
+    <configuration default="false" name="AccessTokenTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="TravelMap\ValueObject\AccessTokenTest" file="$PROJECT_DIR$/test/unit/ValueObject/AccessTokenTest.php" scope="Class" />
+      <method />
+    </configuration>
+    <configuration default="false" name="DateTimeTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="TravelMap\ValueObject\DateTimeTest" file="$PROJECT_DIR$/test/unit/ValueObject/DateTimeTest.php" scope="Class" />
+      <method />
+    </configuration>
+    <configuration default="false" name="EmailTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="TravelMap\ValueObject\EmailTest" file="$PROJECT_DIR$/test/unit/ValueObject/EmailTest.php" scope="Class" />
       <method />
     </configuration>
     <configuration default="true" type="CargoCommandRunConfiguration" factoryName="Cargo Command" show_console_on_std_err="false" show_console_on_std_out="false">
@@ -587,16 +613,22 @@
       <TestRunner scope="XML" />
       <method />
     </configuration>
-    <list size="4">
+    <list size="7">
       <item index="0" class="java.lang.String" itemvalue="PHP Web Application.travel-map" />
       <item index="1" class="java.lang.String" itemvalue="PHPUnit.test" />
-      <item index="2" class="java.lang.String" itemvalue="PHPUnit.UserRepositoryTest.testCreateUser" />
-      <item index="3" class="java.lang.String" itemvalue="PHPUnit.UserRepositoryTest.testGetUserByEmail" />
+      <item index="2" class="java.lang.String" itemvalue="PHPUnit.UserRepositoryTest.testGetUserByEmail" />
+      <item index="3" class="java.lang.String" itemvalue="PHPUnit.UserTest" />
+      <item index="4" class="java.lang.String" itemvalue="PHPUnit.AccessTokenTest" />
+      <item index="5" class="java.lang.String" itemvalue="PHPUnit.DateTimeTest" />
+      <item index="6" class="java.lang.String" itemvalue="PHPUnit.EmailTest" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="PHPUnit.UserRepositoryTest.testGetUserByEmail" />
-        <item index="1" class="java.lang.String" itemvalue="PHPUnit.UserRepositoryTest.testCreateUser" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="PHPUnit.EmailTest" />
+        <item index="1" class="java.lang.String" itemvalue="PHPUnit.DateTimeTest" />
+        <item index="2" class="java.lang.String" itemvalue="PHPUnit.AccessTokenTest" />
+        <item index="3" class="java.lang.String" itemvalue="PHPUnit.UserTest" />
+        <item index="4" class="java.lang.String" itemvalue="PHPUnit.UserRepositoryTest.testGetUserByEmail" />
       </list>
     </recent_temporary>
   </component>
@@ -623,43 +655,44 @@
       <workItem from="1489520831854" duration="8523000" />
       <workItem from="1489922042032" duration="37242000" />
       <workItem from="1490121459321" duration="7170000" />
+      <workItem from="1492321262471" duration="9975000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="test - 2017.03.19 at 21h 07m 16s.xml">
+    <history-entry file="test - 2017.04.16 at 09h 27m 48s.xml">
       <configuration name="test" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="test - 2017.03.19 at 23h 49m 45s.xml">
+    <history-entry file="test - 2017.04.16 at 09h 27m 59s.xml">
       <configuration name="test" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="test - 2017.03.20 at 23h 16m 03s.xml">
+    <history-entry file="test - 2017.04.16 at 09h 30m 23s.xml">
       <configuration name="test" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="test - 2017.03.20 at 23h 16m 58s.xml">
+    <history-entry file="test - 2017.04.16 at 09h 35m 30s.xml">
       <configuration name="test" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="test - 2017.03.20 at 23h 18m 17s.xml">
+    <history-entry file="test - 2017.04.16 at 09h 36m 13s.xml">
       <configuration name="test" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="test - 2017.03.20 at 23h 19m 01s.xml">
+    <history-entry file="test - 2017.04.16 at 09h 40m 50s.xml">
       <configuration name="test" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="test - 2017.03.20 at 23h 20m 06s.xml">
+    <history-entry file="test - 2017.04.16 at 09h 41m 56s.xml">
       <configuration name="test" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="test - 2017.03.20 at 23h 20m 28s.xml">
+    <history-entry file="test - 2017.04.16 at 09h 44m 16s.xml">
       <configuration name="test" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="test - 2017.03.21 at 19h 55m 14s.xml">
+    <history-entry file="test - 2017.04.16 at 09h 45m 51s.xml">
       <configuration name="test" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="test - 2017.03.21 at 19h 55m 23s.xml">
+    <history-entry file="test - 2017.04.16 at 10h 18m 51s.xml">
       <configuration name="test" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69776000" />
+    <option name="totallyTimeSpent" value="79751000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -674,7 +707,7 @@
     <frame x="2" y="23" width="1420" height="873" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28664732" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.266328" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -684,7 +717,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24963716" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33245033" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3986755" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3986755" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -748,197 +781,30 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/Importer/GoogleImporter.php</url>
-          <line>65</line>
+          <line>72</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Importer/GoogleImporter.php</url>
+          <line>104</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Importer/GoogleImporter.php</url>
+          <line>120</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Importer/GoogleImporter.php</url>
+          <line>65</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="41" />
+      <option name="time" value="44" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/lusitanian/oauth/src/OAuth/OAuth2/Service/AbstractService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/gigablah/silex-oauth/src/Security/User/Provider/OAuthUserProviderInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="61" lean-forward="false" selection-start-line="20" selection-start-column="61" selection-end-line="20" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/security/Core/Authentication/Token/AbstractToken.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="25" column="15" lean-forward="false" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/lusitanian/oauth/src/OAuth/Common/Token/AbstractToken.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="21" lean-forward="false" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/ExternalProfile.php" />
-    <entry file="file://$PROJECT_DIR$/src/ValueObject/AccessToken.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="15" lean-forward="false" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ValueObject/Email.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="9" column="16" lean-forward="false" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ValueObject/OAuth.php" />
-    <entry file="file://$PROJECT_DIR$/src/ValueObject/Service.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/login.html.twig" />
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.json.dist">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard/json.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="123" column="9" lean-forward="false" selection-start-line="123" selection-start-column="9" selection-end-line="123" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/routing/Loader/YamlFileLoader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-853">
-          <caret line="26" column="6" lean-forward="false" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard/standard_5.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="540" column="9" lean-forward="false" selection-start-line="540" selection-start-column="9" selection-end-line="540" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Views/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="7" lean-forward="true" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/unit/Repository/UserRepositoryTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="7" lean-forward="false" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
-          <folding>
-            <element signature="e#6#97#0#PHP" expanded="false" />
-            <element signature="e#137#168#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/google/apiclient-services/src/Google/Service/Calendar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="25" column="71" lean-forward="false" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="8" lean-forward="false" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Views/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="26" lean-forward="false" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/phpunit/phpunit/phpunit">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TravelMapApplication.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="108" column="0" lean-forward="false" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/gigablah/silex-oauth/src/EventListener/UserProviderListener.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/security/Core/Authentication/Token/TokenInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="21" column="10" lean-forward="false" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/gigablah/silex-oauth/src/Security/Authentication/Token/OAuthTokenInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="46" lean-forward="false" selection-start-line="11" selection-start-column="46" selection-end-line="11" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/gigablah/silex-oauth/src/Security/Authentication/Token/OAuthToken.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="307">
@@ -951,43 +817,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="27" column="32" lean-forward="false" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/http-kernel/HttpKernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="79" column="6" lean-forward="false" selection-start-line="79" selection-start-column="6" selection-end-line="79" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/OAuthTokenRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding>
-            <element signature="e#133#208#0#PHP" expanded="true" />
-            <marker date="1490125176000" expanded="true" signature="2578:2774" ph="SELECT u.id,... user" />
-            <marker date="1490125176000" expanded="true" signature="3461:3603" ph="SELECT id, s... oauth_token" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/google/apiclient/src/Google/Client.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="189" column="26" lean-forward="false" selection-start-line="189" selection-start-column="26" selection-end-line="189" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -999,45 +828,374 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ValueObject/DateTime.php">
+    <entry file="file://$PROJECT_DIR$/src/Exception/NotFoundException.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+        <state relative-caret-position="45">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Event.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="25" column="8" lean-forward="false" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+          <folding>
+            <element signature="e#128#166#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/google/apiclient/src/Google/Client.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="415" column="18" lean-forward="false" selection-start-line="415" selection-start-column="18" selection-end-line="415" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/google/apiclient-services/src/Google/Service/Calendar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-11293">
+          <caret line="53" column="18" lean-forward="false" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/google/apiclient-services/src/Google/Service/Calendar/Resource/Events.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="224" column="30" lean-forward="false" selection-start-line="224" selection-start-column="23" selection-end-line="224" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/google/apiclient-services/src/Google/Service/Calendar/Events.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="66" column="22" lean-forward="false" selection-start-line="66" selection-start-column="22" selection-end-line="66" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Importer/ImporterInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="11" column="20" lean-forward="false" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/google/apiclient-services/src/Google/Service/Calendar/EventDateTime.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="35" column="29" lean-forward="false" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="29" />
+          <folding>
+            <element signature="e#6#596#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="5" lean-forward="false" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/phpunit/phpunit/phpunit">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/OAuthToken.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="89" column="39" lean-forward="false" selection-start-line="89" selection-start-column="39" selection-end-line="89" selection-end-column="39" />
+        <state relative-caret-position="54">
+          <caret line="36" column="20" lean-forward="false" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Exception/NotFoundException.php">
+    <entry file="file://$PROJECT_DIR$/test/unit/Entity/OAuthTokenTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="171" column="49" lean-forward="false" selection-start-line="166" selection-start-column="16" selection-end-line="171" selection-end-column="49" />
+          <folding>
+            <element signature="e#6#97#0#PHP" expanded="false" />
+            <element signature="e#128#159#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="94" column="31" lean-forward="false" selection-start-line="94" selection-start-column="20" selection-end-line="94" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/unit/ValueObject/AccessTokenTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="23" lean-forward="false" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ValueObject/AccessToken.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="18" column="34" lean-forward="false" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/unit/ValueObject/CoordinatesTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="34" column="29" lean-forward="false" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard/date_c.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="314" column="33" lean-forward="true" selection-start-line="314" selection-start-column="33" selection-end-line="314" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/unit/ValueObject/DateTimeTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="17" column="51" lean-forward="false" selection-start-line="17" selection-start-column="51" selection-end-line="17" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ValueObject/DateTime.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="11" column="20" lean-forward="false" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/unit/Entity/UserTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-566">
+          <caret line="177" column="35" lean-forward="false" selection-start-line="177" selection-start-column="35" selection-end-line="177" selection-end-column="35" />
+          <folding>
+            <element signature="e#128#159#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/unit/ValueObject/EmailTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="43" column="27" lean-forward="false" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ValueObject/Email.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="26" column="28" lean-forward="false" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ValueObject/Coordinates.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/unit/ValueObject/NameTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="32" column="27" lean-forward="false" selection-start-line="32" selection-start-column="27" selection-end-line="32" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ValueObject/Service.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="30" />
+          <caret line="9" column="19" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="19" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/unit/ValueObject/ServiceTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="29" column="7" lean-forward="true" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/unit/ValueObject/TextTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="23" column="34" lean-forward="false" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ValueObject/Text.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="23" column="30" lean-forward="false" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/unit/ValueObject/UrlTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard/filter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="85" column="9" lean-forward="false" selection-start-line="85" selection-start-column="9" selection-end-line="85" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ValueObject/Url.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="18" column="54" lean-forward="false" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phpunit.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="9" lean-forward="false" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="507" column="20" lean-forward="false" selection-start-line="507" selection-start-column="20" selection-end-line="507" selection-end-column="20" />
+          <folding>
+            <marker date="1486558427000" expanded="true" signature="17292:17335" ph="DELETE FROM " />
+            <marker date="1486558427000" expanded="true" signature="20693:20747" ph="INSERT INTO ${$tableExpression}... " />
+            <marker date="1486558427000" expanded="true" signature="21094:21235" ph="INSERT INTO ${$tableExpression}... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/unit/Repository/UserRepositoryTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="29" column="45" lean-forward="false" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/OAuthTokenRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding>
+            <marker date="1490125176000" expanded="true" signature="2578:2774" ph="SELECT u.id,... user" />
+            <marker date="1490125176000" expanded="true" signature="3461:3603" ph="SELECT id, s... oauth_token" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker-compose.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="46" column="16" lean-forward="false" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/UserRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="39" column="9" lean-forward="false" selection-start-line="30" selection-start-column="8" selection-end-line="39" selection-end-column="9" />
+          <folding>
+            <marker date="1492327901000" expanded="true" signature="622:686" ph="SELECT id, a... user" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Provider/UserProvider.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="577">
+        <state relative-caret-position="1078">
           <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/http-kernel/HttpKernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/EventRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="33" column="82" lean-forward="false" selection-start-line="33" selection-start-column="82" selection-end-line="33" selection-end-column="82" />
           <folding>
-            <element signature="e#6#97#0#PHP" expanded="true" />
-            <element signature="e#130#205#0#PHP" expanded="true" />
+            <marker date="1492330715000" expanded="true" signature="729:841" ph="SELECT id, s... user" />
+            <marker date="1492330715000" expanded="true" signature="729:875" ph="SELECT id, s... event" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Provider/AppProvider.php">
+    <entry file="file://$PROJECT_DIR$/vendor/google/apiclient-services/src/Google/Service/Calendar/EventAttendee.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="35" column="31" lean-forward="false" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
+        <state relative-caret-position="270">
+          <caret line="34" column="37" lean-forward="false" selection-start-line="34" selection-start-column="18" selection-end-line="34" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/google/apiclient-services/src/Google/Service/Calendar/Event.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="241" column="18" lean-forward="false" selection-start-line="241" selection-start-column="18" selection-end-line="241" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ValueObject/Name.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="18" column="59" lean-forward="true" selection-start-line="18" selection-start-column="59" selection-end-line="18" selection-end-column="59" />
           <folding />
         </state>
       </provider>
@@ -1050,81 +1208,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/google/apiclient-services/src/Google/Service/Calendar/Event.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1455">
-          <caret line="17" column="6" lean-forward="false" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Importer/ImporterInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="30" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-          <folding>
-            <element signature="e#6#97#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/UserRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="66" column="44" lean-forward="true" selection-start-line="61" selection-start-column="8" selection-end-line="66" selection-end-column="44" />
-          <folding>
-            <element signature="e#132#161#0#PHP" expanded="true" />
-            <marker date="1490046227000" expanded="true" signature="622:693" ph="SELECT id, a... user" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard/filter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="85" column="9" lean-forward="false" selection-start-line="85" selection-start-column="9" selection-end-line="85" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ValueObject/Url.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="28" column="26" lean-forward="false" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ValueObject/Name.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="18" column="62" lean-forward="true" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ValueObject/Text.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="24" column="27" lean-forward="false" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Event.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="17" column="65" lean-forward="false" selection-start-line="17" selection-start-column="65" selection-end-line="17" selection-end-column="65" />
-          <folding>
-            <element signature="e#128#166#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Main.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="34" column="15" lean-forward="false" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="15" />
+        <state relative-caret-position="246">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding>
             <element signature="e#6#97#0#PHP" expanded="true" />
             <element signature="e#132#150#0#PHP" expanded="true" />
@@ -1132,30 +1219,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Importer/GoogleImporter.php">
+    <entry file="file://$PROJECT_DIR$/src/Provider/AppProvider.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="60" column="8" lean-forward="true" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="21" />
-          <folding>
-            <element signature="e#130#148#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ValueObject/Coordinates.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="25" column="32" lean-forward="false" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
+        <state relative-caret-position="298">
+          <caret line="40" column="59" lean-forward="false" selection-start-line="40" selection-start-column="59" selection-end-line="40" selection-end-column="59" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/EventRepository.php">
+    <entry file="file://$PROJECT_DIR$/src/Importer/GoogleImporter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="34" column="20" lean-forward="false" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
+        <state relative-caret-position="417">
+          <caret line="45" column="11" lean-forward="true" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
           <folding>
-            <element signature="e#132#161#0#PHP" expanded="true" />
+            <element signature="e#130#148#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

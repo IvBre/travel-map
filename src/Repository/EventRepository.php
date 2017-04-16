@@ -25,6 +25,35 @@ final class EventRepository {
     }
 
     /**
+     * @param int $userId
+     * @param Coordinates $coordinates
+     * @return null|Event
+     */
+    public function getEventByCoordinates($userId, Coordinates $coordinates) {
+        $query = <<<SQL
+SELECT id, source, location, visited_from, visited_until, link, summary, attendees
+FROM event
+WHERE latitude = ? AND longitude = ? AND user_id = ?
+SQL;
+        $event = $this->db->fetchAssoc($query, [ $coordinates->getLatitude(), $coordinates->getLongitude(), $userId ]);
+
+        if (!$event) {
+            return null;
+        }
+
+        return new Event(
+            $event['id'],
+            new Name($event['location']),
+            $coordinates,
+            new DateTime($event['visited_from']),
+            new DateTime($event['visited_until']),
+            new Url($event['link']),
+            new Text($event['summary']),
+            new Text($event['attendees'])
+        );
+    }
+
+    /**
      * @param Name $location
      * @param Coordinates $coordinates
      * @param DateTime $startDate
@@ -32,6 +61,7 @@ final class EventRepository {
      * @param Url $link
      * @param Text $summary
      * @param Text $attendees
+     * @param int $userId
      * @return Event
      */
     public function createEvent(
@@ -41,9 +71,10 @@ final class EventRepository {
         DateTime $endDate,
         Url $link,
         Text $summary,
-        Text $attendees
+        Text $attendees,
+        $userId
     ) {
-        $this->db->insert('user', [
+        $this->db->insert('event', [
             'source' => 1,
             'location' => $location,
             'latitude' => $coordinates->getLatitude(),
@@ -53,6 +84,7 @@ final class EventRepository {
             'link' => $link,
             'summary' => $summary,
             'attendees' => $attendees,
+            'user_id' => $userId
         ]);
         $eventId = $this->db->lastInsertId();
 

@@ -29,7 +29,7 @@ final class Main {
     }
 
     public function import(Application $app) {
-        /** @var ImporterInterface $user */
+        /** @var ImporterInterface $importer */
         $importer = $app['importer.google'];
 
         $events = $importer->execute();

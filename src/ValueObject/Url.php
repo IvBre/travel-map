@@ -16,7 +16,7 @@ final class Url {
      * @param string $url
      */
     public function __construct($url) {
-        assert(filter_var($url, FILTER_VALIDATE_URL), "Invalid URL");
+        assert(filter_var($url, FILTER_VALIDATE_URL) !== false, "Invalid URL");
 
         $this->url = $url;
     }

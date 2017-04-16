@@ -1,3 +1,5 @@
 /vendor/
 
 /app/config/parameters.json
+/log/
+/log/*

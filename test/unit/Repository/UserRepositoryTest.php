@@ -17,9 +17,27 @@ use TravelMap\ValueObject\Email;
 use TravelMap\ValueObject\Name;
 
 /**
- * @coversDefaultClass TravelMap\Repository\UserRepository::__construct
+ * @coversDefaultClass TravelMap\Repository\UserRepository
  */
 final class UserRepositoryTest extends TestCase {
+
+    /**
+     * @covers ::__construct
+     * @covers ::getUserByEmail
+     */
+    public function testGetUserByEmailNull() {
+
+        $email = new Email('test@dummy.com');
+
+        $db = $this->prophesize(Connection::class);
+        $db->fetchAssoc(Argument::any(), [ $email ])
+            ->willReturn([]);
+        $repository = new UserRepository($db->reveal());
+
+        $result = $repository->getUserByEmail($email);
+
+        $this->assertNull($result);
+    }
 
     /**
      * @covers ::__construct
@@ -54,56 +72,47 @@ final class UserRepositoryTest extends TestCase {
     }
 
     /**
+     * @param int $id
+     * @param Email $email
+     * @param Name $name
      * @covers ::__construct
      * @covers ::createUser
+     * @dataProvider getUsers
      */
-    public function testCreateUser() {
-        $email = new Email('test@dummy.com');
-        $name = new Name('John Smith');
-        $created = new DateTime(date('Y-m-d H:i:s'));
-        $user = new User(
-            123456,
-            $email,
-            $name,
-            $created
-        );
-
+    public function testCreateUser($id, $email, $name) {
         $db = $this->prophesize(Connection::class);
-        $db->insert('user', [
-            'email' => $email,
-            'full_name' => $name,
-            'created' => $created
-        ])
+        $db->insert('user', Argument::any())
             ->willReturn(1);
         $db->lastInsertId()
-            ->willReturn($user->getId());
+            ->willReturn($id);
         $repository = new UserRepository($db->reveal());
 
         $result = $repository->createUser($email, $name);
 
-        $this->assertEquals($user, $result);
+        $this->assertEquals($id, $result->getId());
+        $this->assertEquals($email, $result->getEmail());
+        $this->assertEquals($name, $result->getFullName());
     }
 
     /**
+     * @param int $id
+     * @param Email $email
+     * @param Name $name
      * @covers ::__construct
      * @covers ::updateUser
+     * @dataProvider getUsers
      */
-    public function testUpdateUser() {
-        $email = new Email('test@dummy.com');
-        $name = new Name('John Smith');
+    public function testUpdateUser($id, $email, $name) {
+
         $user = new User(
-            123456,
+            $id,
             $email,
             $name,
-            new DateTime(date('Y-m-d H:i:s')),
             new DateTime(date('Y-m-d H:i:s'))
         );
 
         $db = $this->prophesize(Connection::class);
-        $db->update('user', [
-            'full_name' => (string) $user->getFullName(),
-            'updated' => (new \DateTime())->format('Y-m-d H:i:s')
-        ], [
+        $db->update('user', Argument::any(), [
             'id' => $user->getId()
         ])
             ->willReturn(1);
@@ -111,6 +120,23 @@ final class UserRepositoryTest extends TestCase {
 
         $result = $repository->updateUser($user, $name);
 
-        $this->assertEquals($user, $result);
+        $this->assertSame($user->getId(), $result->getId());
+        $this->assertSame($user->getEmail(), $result->getEmail());
+        $this->assertSame($user->getFullName(), $result->getFullName());
+    }
+
+    public function getUsers() {
+        return [
+            [
+                123456,
+                new Email('john.smith@test.com'),
+                new Name('John Smith')
+            ],
+            [
+                45678,
+                new Email('petar.petrovic@test.com'),
+                new Name('Petar Petrovic')
+            ]
+        ];
     }
 }

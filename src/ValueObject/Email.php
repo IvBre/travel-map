@@ -7,6 +7,8 @@
 
 namespace TravelMap\ValueObject;
 
+use Psr\Log\InvalidArgumentException;
+
 final class Email {
 
     /** @var string */
@@ -16,7 +18,7 @@ final class Email {
      * @param string $email
      */
     public function __construct($email) {
-        assert(filter_var($email, FILTER_VALIDATE_EMAIL) !== false, "Invalid email");
+        $this->validateEmail($email);
 
         $this->email = $email;
     }
@@ -28,5 +30,15 @@ final class Email {
 
     public function __toString() {
         return $this->email;
+    }
+
+    /**
+     * @param string $email
+     * @throws InvalidArgumentException
+     */
+    private function validateEmail($email) {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            throw new InvalidArgumentException("Provided email is not in the correct format.");
+        }
     }
 }

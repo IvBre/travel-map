@@ -7,6 +7,8 @@
 
 namespace TravelMap\ValueObject;
 
+use Psr\Log\InvalidArgumentException;
+
 final class DateTime {
 
     /** @var \DateTime */
@@ -16,9 +18,12 @@ final class DateTime {
      * @param string $dateTime
      */
     public function __construct($dateTime) {
-        $dateTime = new \DateTime($dateTime);
-
-        assert($dateTime instanceof \DateTime, "Could not create DateTime object. Please check the format.");
+        try {
+            $dateTime = new \DateTime($dateTime);
+        }
+        catch (\Exception $e) {
+            throw new InvalidArgumentException("Could not create DateTime object. Please check the format.");
+        }
 
         $this->dateTime = $dateTime;
     }
