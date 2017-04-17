@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use TravelMap\TravelMapApplication;
+use Knp\Provider\ConsoleServiceProvider;
+
+$app = new TravelMapApplication();
+$app['debug'] = true;
+
+$console = $app['console'];
+$console->add($app['importer.google.command']);
+$console->run();

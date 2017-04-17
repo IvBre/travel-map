@@ -9,5 +9,9 @@ namespace TravelMap\Importer;
 
 interface ImporterInterface {
 
+    /**
+     * Executes the importing of events into db
+     * @return integer
+     */
     public function execute();
 }

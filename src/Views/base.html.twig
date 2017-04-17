@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        {% block head %}
-            <link rel="stylesheet" href="css/style.css" />
-            <title>{% block title %}{% endblock %} - Travel map</title>
-        {% endblock %}
-    </head>
+    {% include "head.html.twig" %}
+
     <body>
-        <content>{% block content %}{% endblock %}</content>
+        {% include "header.html.twig" %}
+        <div class="flash-messages">
+            {% for success in app.session.flashbag.get('success') %}
+                <div class="success">{{ success }}</div>
+            {% endfor %}
+            {% for info in app.session.flashbag.get('info') %}
+                <div class="info">{{ info }}</div>
+            {% endfor %}
+            {% for error in app.session.flashbag.get('error') %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
         <footer>
-            {% block footer %}
-                &copy; Copyright
-            {% endblock %}
+            {% include "footer.html.twig" %}
         </footer>
+
+        {% block script %}{% endblock %}
     </body>
 </html>

@@ -1,0 +1,82 @@
+<script>
+    var totalPins = 0;
+    function addPin(map, event) {
+        var eventLatLng = {lat: event.coordinates.lat, lng: event.coordinates.lng};
+
+        var monthNames = [
+            "January", "February", "March",
+            "April", "May", "June", "July",
+            "August", "September", "October",
+            "November", "December"
+        ];
+
+        var fromDate = new Date(event.start);
+
+        var contentString = '<div id="info-box">' +
+            '<h2>' + event.location + '</h2>' +
+            '<div class="dates"><i>in ' + monthNames[fromDate.getMonth()] + ' of ' + fromDate.getFullYear() +
+            '</i></div>';
+
+        if (event.summary != "") {
+            contentString += '<div class="summary"><b>Summary:</b> ' + event.summary + '</div>';
+        }
+        if (event.attendees != "") {
+            contentString += '<div class="attendees"><b>Attendees:</b> ' + event.attendees + '</div>';
+        }
+
+        contentString += '<p><a href="' + event.link + '" target="_blank">More details ⇨</a></p>';
+        contentString += '</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+        var marker = new google.maps.Marker({
+            position: eventLatLng,
+            map: map,
+            title: event.location
+        });
+
+        ++totalPins;
+
+        marker.addListener('click', function() {
+            infowindow.open(map, marker);
+        });
+    }
+
+    function initMap() {
+        totalPins = 0;
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: new google.maps.LatLng(0, 0),
+            zoom: 2,
+            minZoom: 1
+        });
+
+        // send ajax request for events
+        $.get('{{ path('events') }}', function(events) {
+            if (events) {
+                events.forEach(function(val) {
+                    addPin(map, val);
+                });
+            }
+        });
+
+        google.maps.event.addDomListener(window, "resize", function() {
+            var center = map.getCenter();
+            google.maps.event.trigger(map, "resize");
+            map.setCenter(center);
+        });
+    }
+
+    setInterval ( function() {
+        $.get('{{ path('events-count') }}', function(result) {
+            console.log(result.total +'>'+ totalPins);
+            if (result.total > totalPins) {
+                console.log('uso');
+                initMap();
+            }
+        });
+    }, 10000 );
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=initMap"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

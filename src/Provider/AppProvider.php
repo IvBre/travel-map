@@ -9,6 +9,7 @@ namespace TravelMap\Provider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use TravelMap\Command\GoogleImportCommand;
 use TravelMap\Importer\GoogleImporter;
 use TravelMap\Repository\EventRepository;
 use TravelMap\Repository\OAuthTokenRepository;
@@ -37,8 +38,11 @@ final class AppProvider implements ServiceProviderInterface {
 
         // ------------ Importers -------------- //
         $app['importer.google'] = function () use ($app) {
-            $user = $app['user'];
-            return new GoogleImporter($app['google'], $user, $app['repository.event']);
+            return new GoogleImporter($app['user'], $app['base_path']);
+        };
+
+        $app['importer.google.command'] = function () use ($app) {
+            return new GoogleImportCommand($app['google'], $app['repository.oauth_token'], $app['repository.event']);
         };
     }
 }

@@ -32,6 +32,11 @@ final class OAuthTokenRepository {
     public function createOAuthToken($userId, OAuthTokenInterface $token) {
         $service = new Service($token->getService());
         $accessToken = new AccessToken($token->getCredentials());
+        $refreshToken = null;
+        if ($token->getAccessToken()->getRefreshToken() !== null) {
+            $refreshToken = new AccessToken($token->getAccessToken()->getRefreshToken());
+        }
+
         $created = new DateTime(date('Y-m-d H:i:s'));
         $date = date('Y-m-d H:i:s', $token->getAccessToken()->getEndOfLife());
         $expiresOn = new DateTime($date);
@@ -39,6 +44,7 @@ final class OAuthTokenRepository {
             'user_id' => $userId,
             'service' => (string) $service,
             'access_token' => (string) $accessToken,
+            'refresh_token' => $refreshToken,
             'expires_on' => $expiresOn,
             'created' => $created,
         ]);
@@ -51,7 +57,9 @@ final class OAuthTokenRepository {
             $service,
             $accessToken,
             $expiresOn,
-            $created
+            $created,
+            null,
+            $refreshToken
         );
     }
 
@@ -63,6 +71,7 @@ final class OAuthTokenRepository {
     public function updateOAuthToken($userId, OAuthToken $OAuthToken) {
         $service = $OAuthToken->getService();
         $accessToken = $OAuthToken->getAccessToken();
+        $refreshToken = $OAuthToken->getRefreshToken();
         $lastTimeUsed = new DateTime(date('Y-m-d H:i:s'));
         $this->db->update('oauth_token', [
             'last_time_used' => $lastTimeUsed,
@@ -78,7 +87,8 @@ final class OAuthTokenRepository {
             $accessToken,
             $OAuthToken->getExpiresOn(),
             $OAuthToken->getCreated(),
-            $lastTimeUsed
+            $lastTimeUsed,
+            $refreshToken
         );
     }
 
@@ -103,13 +113,22 @@ SQL;
 
         $expiresOnDate = date('Y-m-d H:i:s', $token->getAccessToken()->getEndOfLife());
 
+        if ($token->getAccessToken()->getRefreshToken() !== null) {
+            $refreshToken = new AccessToken($token->getAccessToken()->getRefreshToken());
+        }
+        else {
+            $refreshToken = $this->getLastRefreshToken($userId, $oathToken['service']);
+        }
+
         return new OAuthToken(
             $oathToken['id'],
             $userId,
             new Service($token->getService()),
             new AccessToken($token->getCredentials()),
             new DateTime($expiresOnDate),
-            new DateTime($oathToken['created'])
+            new DateTime($oathToken['created']),
+            null,
+            $refreshToken
         );
     }
 
@@ -119,7 +138,7 @@ SQL;
      */
     public function getLastUsedOAuthToken($userId) {
         $query = <<<SQL
-SELECT id, service, access_token, expires_on, created, last_time_used
+SELECT id, service, access_token, refresh_token, expires_on, created, last_time_used
 FROM oauth_token
 WHERE user_id = ?
 ORDER BY last_time_used DESC 
@@ -131,6 +150,13 @@ SQL;
             throw new AccessDeniedException("You need to log in to proceed.");
         }
 
+        if ($oathToken['refresh_token'] !== null) {
+            $refreshToken = new AccessToken($oathToken['refresh_token']);
+        }
+        else {
+            $refreshToken = $this->getLastRefreshToken($userId, $oathToken['service']);
+        }
+
         return new OAuthToken(
             $oathToken['id'],
             $userId,
@@ -138,7 +164,32 @@ SQL;
             new AccessToken($oathToken['access_token']),
             new DateTime($oathToken['expires_on']),
             new DateTime($oathToken['created']),
-            new DateTime($oathToken['last_time_used'])
+            new DateTime($oathToken['last_time_used']),
+            $refreshToken
         );
+    }
+
+    /**
+     * @param int $userId
+     * @param string $service
+     * @throws AccessDeniedException
+     * @return AccessToken
+     */
+    public function getLastRefreshToken($userId, $service) {
+        $query = <<<SQL
+SELECT refresh_token 
+FROM oauth_token 
+WHERE service = ? 
+  AND user_id = ? 
+  AND refresh_token IS NOT NULL 
+ORDER BY expires_on DESC
+SQL;
+        $oathToken = $this->db->fetchAssoc($query, [ $service, $userId ]);
+
+        if (!$oathToken) {
+            throw new AccessDeniedException("You need to log in to proceed.");
+        }
+
+        return new AccessToken($oathToken['refresh_token']);
     }
 }

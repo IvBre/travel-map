@@ -26,6 +26,39 @@ final class EventRepository {
 
     /**
      * @param int $userId
+     * @return array
+     */
+    public function getAllEventsByUser($userId) {
+        $query = <<<SQL
+SELECT id, source, location, latitude, longitude, visited_from, visited_until, link, summary, attendees
+FROM event
+WHERE user_id = ?
+SQL;
+        $result = $this->db->fetchAll($query, [ $userId ]);
+
+        if (!$result) {
+            return [];
+        }
+
+        $events = [];
+        foreach ($result as $event) {
+            $events[] = new Event(
+                $event['id'],
+                new Name($event['location']),
+                new Coordinates($event['latitude'], $event['longitude']),
+                new DateTime($event['visited_from']),
+                new DateTime($event['visited_until']),
+                new Url($event['link']),
+                new Text($event['summary']),
+                new Text($event['attendees'])
+            );
+        }
+
+        return $events;
+    }
+
+    /**
+     * @param int $userId
      * @param Coordinates $coordinates
      * @return null|Event
      */
@@ -51,6 +84,21 @@ SQL;
             new Text($event['summary']),
             new Text($event['attendees'])
         );
+    }
+
+    /**
+     * @param int $userId
+     * @return int
+     */
+    public function getCountOfAllEventsByUser($userId) {
+        $query = <<<SQL
+SELECT COUNT(*) AS total
+FROM event
+WHERE user_id = ?
+SQL;
+        $result = $this->db->fetchAssoc($query, [ $userId ]);
+
+        return $result['total'];
     }
 
     /**
@@ -98,5 +146,17 @@ SQL;
             $summary,
             $attendees
         );
+    }
+
+    /**
+     * @param int $userId
+     */
+    public function deleteUserEvents($userId) {
+        $query = <<<SQL
+DELETE
+FROM event
+WHERE user_id = ?
+SQL;
+        $this->db->executeQuery($query, [ $userId ]);
     }
 }

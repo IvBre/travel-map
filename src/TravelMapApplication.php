@@ -8,6 +8,7 @@
 namespace TravelMap;
 
 use Gigablah\Silex\OAuth\OAuthServiceProvider;
+use Knp\Provider\ConsoleServiceProvider;
 use Silex\Application;
 use Silex\Provider\FormServiceProvider;
 use Silex\Provider\TwigServiceProvider;
@@ -53,9 +54,12 @@ final class TravelMapApplication extends Application {
                     'scope' => array(
                         'https://www.googleapis.com/auth/userinfo.email',
                         //'https://www.googleapis.com/auth/userinfo.profile',
-                        'https://www.googleapis.com/auth/calendar.readonly'
+                        'https://www.googleapis.com/auth/calendar.readonly',
                     ),
-                    'user_endpoint' => 'https://www.googleapis.com/oauth2/v1/userinfo'
+                    'additional_params' => [
+                        'access_type' => 'offline'
+                    ],
+                    'user_endpoint' => 'https://www.googleapis.com/oauth2/v1/userinfo?access_type=offline'
                 ),
             )
         ));
@@ -79,7 +83,9 @@ final class TravelMapApplication extends Application {
                 )
             ),
             'security.access_rules' => array(
-                array('^/auth', 'ROLE_USER')
+                ['^/auth', 'ROLE_USER'],
+                ['^/events', 'ROLE_USER'],
+                ['^/import', 'ROLE_USER']
             )
         ]);
 
@@ -96,6 +102,12 @@ final class TravelMapApplication extends Application {
                 $app['user'] = $token->getUser();
             }
         });
+
+        $app->register(new ConsoleServiceProvider(), array(
+            'console.name'              => 'Travel Map',
+            'console.version'           => '1.0.0',
+            'console.project_directory' => __DIR__.'/..'
+        ));
     }
 
     private function loadConfig($values = []) {
@@ -103,12 +115,11 @@ final class TravelMapApplication extends Application {
             'base_path' => dirname(__DIR__) . '/',
             'app_config_path' => dirname(__DIR__) . '/app/config/',
             'base_url' => 'http://localhost',
-            'google_client_secret' => '../app/config/google/google_oauth2_client_secret.json',
         ];
 
         $parameters = json_decode(file_get_contents($default['app_config_path'] . "/parameters.json"), true);
         if ($parameters === null) {
-            throw new InvalidConfigurationException("parameters.json file is missing fromt he config folder.");
+            throw new InvalidConfigurationException("parameters.json file is missing from the config folder.");
         }
 
         $default = array_merge($default, $parameters);

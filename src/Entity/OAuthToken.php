@@ -25,6 +25,9 @@ final class OAuthToken {
     /** @var AccessToken */
     private $accessToken;
 
+    /** @var AccessToken */
+    private $refreshToken;
+
     /** @var DateTime */
     private $expiresOn;
 
@@ -41,7 +44,8 @@ final class OAuthToken {
         AccessToken $accessToken,
         DateTime $expiresOn,
         DateTime $created,
-        DateTime $lastTimeUsed = null
+        DateTime $lastTimeUsed = null,
+        AccessToken $refreshToken = null
     ) {
         $this->id = $id;
         $this->userId = $userId;
@@ -50,6 +54,7 @@ final class OAuthToken {
         $this->expiresOn = $expiresOn;
         $this->created = $created;
         $this->lastTimeUsed = $lastTimeUsed;
+        $this->refreshToken = $refreshToken;
     }
 
     /** @return int */
@@ -65,6 +70,11 @@ final class OAuthToken {
     /** @return AccessToken */
     public function getAccessToken() {
         return $this->accessToken;
+    }
+
+    /** @return AccessToken|null */
+    public function getRefreshToken() {
+        return $this->refreshToken;
     }
 
     /** @return DateTime */
@@ -88,6 +98,7 @@ final class OAuthToken {
         $diff = $now->diff($this->expiresOn->getDateTime());
         return [
             'access_token' => (string) $this->accessToken,
+            'refresh_token' => (string) $this->refreshToken,
             'expires_in' => $diff->format('U'),
             'expires_on' => (string) $this->expiresOn,
             'issued_at' => (string) $this->created,

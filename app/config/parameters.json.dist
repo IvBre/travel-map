@@ -8,5 +8,6 @@
     "google": {
         "client_id": "<client id that you recieved from Google API Console>",
         "client_secret": "<client secret that you recieved from Google API Console>"
+        "api_key": "<Google Javascript API KEY>"
     }
 }
