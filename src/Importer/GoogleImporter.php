@@ -7,7 +7,6 @@
 
 namespace TravelMap\Importer;
 
-use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 use TravelMap\Entity\User;
 

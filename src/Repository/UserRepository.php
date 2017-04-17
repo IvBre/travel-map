@@ -52,6 +52,10 @@ SQL;
         );
     }
 
+    /**
+     * @param string $token
+     * @return null|User
+     */
     public function getUserByShareToken($token) {
         $query = <<<SQL
 SELECT id, email, full_name, created, updated
@@ -78,6 +82,10 @@ SQL;
         );
     }
 
+    /**
+     * @param int $userId
+     * @return string
+     */
     public function getShareTokenByUserId($userId) {
         $query = <<<SQL
 SELECT share_token

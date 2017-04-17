@@ -40,6 +40,7 @@ final class GoogleImportCommand extends Command {
         $this->eventRepository = $eventRepository;
     }
 
+    /** @inheritdoc */
     protected function configure() {
         $this
             ->setName("import:google")
@@ -47,6 +48,7 @@ final class GoogleImportCommand extends Command {
             ->addArgument('userId', InputArgument::REQUIRED, "User ID to import events for.");
     }
 
+    /** @inheritdoc */
     protected function execute(InputInterface $input, OutputInterface $output) {
         $userId = $input->getArgument('userId');
         $oAuthToken = $this->oAuthTokenRepository->getLastUsedOAuthToken($userId);
@@ -66,6 +68,12 @@ final class GoogleImportCommand extends Command {
         return 0;
     }
 
+    /**
+     * @param Google_Client $client
+     * @param int $userId
+     * @param string|null $nextPageToken
+     * @return int
+     */
     private function importEvents($client, $userId, $nextPageToken = null) {
         $service = new Google_Service_Calendar($client);
 

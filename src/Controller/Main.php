@@ -12,13 +12,15 @@ use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use TravelMap\Entity\User;
-use TravelMap\Exception\NotFoundException;
 use TravelMap\Importer\ImporterInterface;
 
 final class Main {
 
+    /**
+     * @param Request $request
+     * @param Application $app
+     */
     public function index(Request $request, Application $app) {
         return $app['twig']->render('index.html.twig', [
             'login_paths' => $app['oauth.login_paths'],
@@ -30,6 +32,11 @@ final class Main {
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param Application $app
+     * @return JsonResponse
+     */
     public function events(Request $request, Application $app) {
         $userId = $this->getUserId($request, $app);
 
@@ -38,6 +45,11 @@ final class Main {
         return new JsonResponse($events);
     }
 
+    /**
+     * @param Request $request
+     * @param Application $app
+     * @return JsonResponse
+     */
     public function eventsCount(Request $request, Application $app) {
         $userId = $this->getUserId($request, $app);
         $totalEvents = $app['repository.event']->getCountOfAllEventsByUser($userId);
@@ -45,6 +57,10 @@ final class Main {
         return new JsonResponse([ 'total' => $totalEvents ]);
     }
 
+    /**
+     * @param Application $app
+     * @return RedirectResponse
+     */
     public function import(Application $app) {
         /** @var ImporterInterface $importer */
         $importer = $app['importer.google'];
@@ -57,12 +73,21 @@ final class Main {
         return new RedirectResponse('/');
     }
 
+    /**
+     * @param Application $app
+     * @return JsonResponse
+     */
     public function shareToken(Application $app) {
         $shareToken = $app['repository.user']->getShareTokenByUserId($app['user']->getId());
 
         return new JsonResponse([ 'shareToken' => $shareToken ]);
     }
 
+    /**
+     * @param string $token
+     * @param Application $app
+     * @return RedirectResponse
+     */
     public function share($token, Application $app) {
         $user = $app['repository.user']->getUserByShareToken($token);
 
@@ -78,13 +103,19 @@ final class Main {
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param Application $app
+     * @return int
+     * @throws AccessDeniedException
+     */
     private function getUserId(Request $request, Application $app) {
         if ($request->query->has('st')) {
             $sharedToken = $request->query->get('st');
             /** @var User $user */
             $user = $app['repository.user']->getUserByShareToken($sharedToken);
             if ($user === null) {
-                throw new NotFoundException("The requested user does not exists.");
+                throw new AccessDeniedException("The requested user does not exists.");
             }
             return $user->getId();
         }
