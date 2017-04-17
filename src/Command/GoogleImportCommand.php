@@ -9,6 +9,7 @@ namespace TravelMap\Command;
 
 use Google_Client;
 use Google_Service_Calendar;
+use Google_Service_Calendar_CalendarListEntry;
 use Google_Service_Calendar_EventAttendee;
 use Knp\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -61,7 +62,15 @@ final class GoogleImportCommand extends Command {
         // clear previous imported events
         $this->eventRepository->deleteUserEvents($userId);
 
-        $result = $this->importEvents($client, $userId);
+        $service = new Google_Service_Calendar($client);
+        $calendarList = $service->calendarList->listCalendarList();
+        $result = 0;
+        /** @var Google_Service_Calendar_CalendarListEntry $calendar */
+        foreach ($calendarList->getItems() as $calendar) {
+            $output->writeln("Calendar: " . $calendar->getSummary());
+            $calendarId = $calendar->getId();
+            $result += $this->importEvents($output, $service, $userId, $calendarId);
+        }
 
         $output->writeln("Total events imported: {$result}");
 
@@ -69,16 +78,16 @@ final class GoogleImportCommand extends Command {
     }
 
     /**
-     * @param Google_Client $client
+     * @param OutputInterface $output
+     * @param Google_Service_Calendar $service
      * @param int $userId
+     * @param string $calendarId
      * @param string|null $nextPageToken
      * @return int
      */
-    private function importEvents($client, $userId, $nextPageToken = null) {
-        $service = new Google_Service_Calendar($client);
-
-        $calendarId = 'primary';
+    private function importEvents(OutputInterface $output, $service, $userId, $calendarId = 'primary', $nextPageToken = null) {
         $optParams = [
+            'showHiddenInvitations' => true,
             'singleEvents' => true,
             'timeMax' => date('c'),
             'maxResults' => 500
@@ -91,7 +100,10 @@ final class GoogleImportCommand extends Command {
         $events = 0;
         /** @var \Google_Service_Calendar_Event $event */
         $foundEvents = $results->getItems();
+        $output->writeln("Found " . count($foundEvents) . " events.");
         foreach ($foundEvents as $event) {
+            $output->writeln("Name: " . $event->getSummary());
+            $output->writeln("Location: " . $event->getLocation());
             if ($event->getLocation() === null) {
                 continue;
             }
@@ -99,11 +111,14 @@ final class GoogleImportCommand extends Command {
             $coordinates = $this->getCoordinates($location);
             // event location is not a valid location so skip this event
             if (!$coordinates) {
+                $output->writeln("Coordinates not available.");
                 continue;
             }
+            $output->writeln("Latitude: " . $coordinates->getLatitude() . " Longitude: " . $coordinates->getLongitude());
 
             $storedEvent = $this->eventRepository->getEventByCoordinates($userId, $coordinates);
             if ($storedEvent !== null) {
+                $output->writeln("Event already imported.");
                 continue;
             }
 
@@ -128,11 +143,13 @@ final class GoogleImportCommand extends Command {
                 $attendees,
                 $userId
             );
+            $output->writeln("Event " . $location->getName() . " imported.");
             $events++;
         }
 
         if ($results->getNextPageToken() !== null) {
-            return $events + $this->importEvents($client, $userId, $results->getNextPageToken());
+            $output->writeln("Next page...");
+            return $events + $this->importEvents($output, $service, $userId, $calendarId, $results->getNextPageToken());
         }
 
         return $events;
@@ -144,7 +161,8 @@ final class GoogleImportCommand extends Command {
      */
     private function getCoordinates($address){
         $address = urlencode($address);
-        $url = "http://maps.google.com/maps/api/geocode/json?address=$address&sensor=false";
+        $url = "https://maps.google.com/maps/api/geocode/json?address=$address&key={$this->authConfig['api_key']}&sensor=false";
+
         $ch = curl_init();
         $options = array(
             CURLOPT_SSL_VERIFYPEER => false,
