@@ -8,9 +8,13 @@
 namespace TravelMap\Controller;
 
 use Silex\Application;
+use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use TravelMap\Entity\User;
+use TravelMap\Exception\NotFoundException;
 use TravelMap\Importer\ImporterInterface;
 
 final class Main {
@@ -26,14 +30,17 @@ final class Main {
         ]);
     }
 
-    public function events(Application $app) {
-        $events = $app['repository.event']->getAllEventsByUser($app['user']->getId());
+    public function events(Request $request, Application $app) {
+        $userId = $this->getUserId($request, $app);
+
+        $events = $app['repository.event']->getAllEventsByUser($userId);
 
         return new JsonResponse($events);
     }
 
-    public function eventsCount(Application $app) {
-        $totalEvents = $app['repository.event']->getCountOfAllEventsByUser($app['user']->getId());
+    public function eventsCount(Request $request, Application $app) {
+        $userId = $this->getUserId($request, $app);
+        $totalEvents = $app['repository.event']->getCountOfAllEventsByUser($userId);
 
         return new JsonResponse([ 'total' => $totalEvents ]);
     }
@@ -50,9 +57,41 @@ final class Main {
         return new RedirectResponse('/');
     }
 
-    public function share($token, Application $app) {
-        $email = base64_decode($token);
+    public function shareToken(Application $app) {
+        $shareToken = $app['repository.user']->getShareTokenByUserId($app['user']->getId());
 
-        return $app['twig']->render('share.html.twig');
+        return new JsonResponse([ 'shareToken' => $shareToken ]);
+    }
+
+    public function share($token, Application $app) {
+        $user = $app['repository.user']->getUserByShareToken($token);
+
+        if ($user === null) {
+            $app['session']->getFlashBag()->add('error', 'The requested map does not exists.');
+            return new RedirectResponse('/');
+        }
+
+        return $app['twig']->render('share.html.twig', [
+            'user' => $user,
+            'api_key' => $app['google']['api_key'],
+            'token' => $token,
+        ]);
+    }
+
+    private function getUserId(Request $request, Application $app) {
+        if ($request->query->has('st')) {
+            $sharedToken = $request->query->get('st');
+            /** @var User $user */
+            $user = $app['repository.user']->getUserByShareToken($sharedToken);
+            if ($user === null) {
+                throw new NotFoundException("The requested user does not exists.");
+            }
+            return $user->getId();
+        }
+        elseif (isset($app['user'])) {
+            return $app['user']->getId();
+        }
+
+        throw new AccessDeniedException("You are not allowed to access these pages.");
     }
 }

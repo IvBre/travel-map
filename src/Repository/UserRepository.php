@@ -52,6 +52,57 @@ SQL;
         );
     }
 
+    public function getUserByShareToken($token) {
+        $query = <<<SQL
+SELECT id, email, full_name, created, updated
+FROM user
+WHERE share_token = ?
+SQL;
+        $user = $this->db->fetchAssoc($query, [ (string) $token ]);
+
+        if (!$user) {
+            return null;
+        }
+
+        $email = new Email($user['email']);
+        $fullName = new Name($user['full_name']);
+        $created = new DateTime($user['created']);
+        $updated = new DateTime($user['updated']);
+
+        return new User(
+            $user['id'],
+            $email,
+            $fullName,
+            $created,
+            $updated
+        );
+    }
+
+    public function getShareTokenByUserId($userId) {
+        $query = <<<SQL
+SELECT share_token
+FROM user
+WHERE id = ?
+SQL;
+        $result = $this->db->fetchAssoc($query, [ $userId ]);
+
+        if ($result['share_token'] !== null) {
+            return $result['share_token'];
+        }
+
+        $shareToken = md5(uniqid($userId, true));
+
+        $dateTime = (new \DateTime())->format('Y-m-d H:i:s');
+        $this->db->update('user', [
+            'share_token' => $shareToken,
+            'updated' => $dateTime
+        ], [
+            'id' => $userId
+        ]);
+
+        return $shareToken;
+    }
+
     /**
      * @param Email $email
      * @param Name $fullName

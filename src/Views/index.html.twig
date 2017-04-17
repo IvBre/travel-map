@@ -1,9 +1,68 @@
 {% extends "base.html.twig" %}
 
+{% block title %}
+    {% if app.user %}
+        {{ app.user.fullname }}
+    {% else %}
+        Create your own
+    {% endif %}
+{% endblock %}
+
+{% block header %}
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    {% if app.user %}
+        <p>Hello {{ app.user.fullname }}! Your email is {{ app.user.email }}</p>
+        <a href="{{ path('import') }}">Sync with Google Calendar</a>
+        <a href="#" class="share-btn">Share</a>
+        <a href="{{ logout_path }}">Logout</a>
+        <div class="share-box hidden">
+            <div class="social-links">
+                <a href="" class="fb">Share on Facebook</a>
+                <a href="" class="gplus">Share on Google+</a>
+                <a href="" class="twt">Share on Twitter</a>
+            </div>
+            <input type="text" readonly value="" size="60" />
+        </div>
+    {% else %}
+        <ul>
+            {#<li><a href="{{ login_paths.facebook }}">Login with Facebook</a></li>#}
+            <li><a href="{{ login_paths.google }}">Login with Google</a></li>
+        </ul>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     {% include "_map_content.html.twig" %}
 {% endblock %}
 
 {% block script %}
+    {{ parent() }}
+    <script>
+        $(function() {
+            $('.share-btn').on('click', function(e) {
+                e.preventDefault();
+                $.get('{{ path('get-share-token') }}', function(data) {
+                    if (data.shareToken !== undefined) {
+                        var url = '{{ url('share', { token: 'token' }) }}';
+                        url = url.replace('token', data.shareToken);
+                        var urlEncoded = encodeURI(url);
+                        $('.share-box input').val(url);
+                        $('.share-box a.fb').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=' + urlEncoded);
+                        $('.share-box a.twt').attr('href', 'https://twitter.com/home?status=' + urlEncoded);
+                        $('.share-box a.gplus').attr('href', 'https://plus.google.com/share?url=Check+out+my+awesome+travel+map+' + urlEncoded);
+                        $('.share-box').removeClass('hidden');
+                    }
+                });
+            });
+
+            $('.social-links a').on('click', function(e) {
+                e.preventDefault();
+
+                window.open(this.href, this.value, 'width=500,height=500');
+            });
+        });
+    </script>
     {% include "_map_script.html.twig" with { api_key: api_key } %}
 {% endblock %}

@@ -53,7 +53,14 @@
         });
 
         // send ajax request for events
-        $.get('{{ path('events') }}', function(events) {
+        var path = '{{ path('events') }}';
+
+        var shareToken = '{{ shareToken|default('') }}';
+        if (shareToken !== '') {
+            path += '?st=' + shareToken;
+        }
+
+        $.get(path, function(events) {
             if (events) {
                 events.forEach(function(val) {
                     addPin(map, val);
@@ -69,14 +76,18 @@
     }
 
     setInterval ( function() {
-        $.get('{{ path('events-count') }}', function(result) {
-            console.log(result.total +'>'+ totalPins);
+        var path = '{{ path('events-count') }}';
+
+        var shareToken = '{{ shareToken|default('') }}';
+        if (shareToken !== '') {
+            path += '?st=' + shareToken;
+        }
+
+        $.get(path, function(result) {
             if (result.total > totalPins) {
-                console.log('uso');
                 initMap();
             }
         });
     }, 10000 );
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=initMap"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

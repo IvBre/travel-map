@@ -10,6 +10,7 @@ namespace TravelMap;
 use Gigablah\Silex\OAuth\OAuthServiceProvider;
 use Knp\Provider\ConsoleServiceProvider;
 use Silex\Application;
+use Silex\Provider\AssetServiceProvider;
 use Silex\Provider\FormServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Symfony\Component\Form\Exception\InvalidConfigurationException;
@@ -84,8 +85,8 @@ final class TravelMapApplication extends Application {
             ),
             'security.access_rules' => array(
                 ['^/auth', 'ROLE_USER'],
-                ['^/events', 'ROLE_USER'],
-                ['^/import', 'ROLE_USER']
+                ['^/import', 'ROLE_USER'],
+                ['^/shareToken', 'ROLE_USER']
             )
         ]);
 
@@ -102,6 +103,11 @@ final class TravelMapApplication extends Application {
                 $app['user'] = $token->getUser();
             }
         });
+
+        $app->register(new AssetServiceProvider(), array(
+            'assets.version' => 'v1',
+            'assets.version_format' => '%s?version=%s',
+        ));
 
         $app->register(new ConsoleServiceProvider(), array(
             'console.name'              => 'Travel Map',

@@ -22,6 +22,10 @@ footer{
     width: 100%;
 }
 
+.hidden {
+    display: none;
+}
+
 #map {
     height: 100%;
     width: 100%;

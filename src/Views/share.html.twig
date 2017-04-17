@@ -1,9 +1,17 @@
 {% extends "base.html.twig" %}
 
+{% block title %}{{ user.fullname }}{% endblock %}
+
+{% block header %}
+<p>You are looking at map from {{ user.fullName }}</p>
+<a href="{{ path('home') }}">Create your own map</a>
+{% endblock %}
+
 {% block content %}
     {% include "_map_content.html.twig" %}
 {% endblock %}
 
 {% block script %}
-    {% include "_map_script.html.twig" %}
+    {{ parent() }}
+    {% include "_map_script.html.twig" with { api_key: api_key, shareToken: token } %}
 {% endblock %}

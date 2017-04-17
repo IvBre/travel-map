@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
-    {% include "head.html.twig" %}
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+        <title>{% block title %}{% endblock %} - Travel map</title>
+    </head>
 
     <body>
-        {% include "header.html.twig" %}
+        <header>
+            {% block header %}{% endblock %}
+        </header>
         <div class="flash-messages">
             {% for success in app.session.flashbag.get('success') %}
                 <div class="success">{{ success }}</div>
@@ -23,6 +28,8 @@
             {% include "footer.html.twig" %}
         </footer>
 
-        {% block script %}{% endblock %}
+        {% block script %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        {% endblock %}
     </body>
 </html>
