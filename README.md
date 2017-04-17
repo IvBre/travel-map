@@ -13,22 +13,28 @@ User can log in using OAuth and import its events from Google Calendar
 ### Docker
 Docker is available for this application for you to use. Run these commands to start
  the docker machine and containers:
-```$xslt
+ 
+```
 $ docker-machine start
 $ eval $(docker-machine env)
 $ docker-compose up -d
 ```
+
 Please not that this will start the `default` docker machine.
 
 Edit your `/etc/hosts` file and add entry:
-```$xslt
+
+```
 192.168.99.100 localhost
 ```
+
 Please note that this IP address is for the default machine, 
  and if it does not work for you type in:
- ```$xslt
+ 
+```
 $ docker-machine ip
 ```
+
 to find the correct IP of your current active machine.
 
 Run [your local application](http://localhost) in the browser.

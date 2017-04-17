@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3325d67b-5bd6-49b6-927e-3ed4f6b7b667" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Command/GoogleImportCommand.php" afterPath="$PROJECT_DIR$/src/Command/GoogleImportCommand.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/Main.php" afterPath="$PROJECT_DIR$/src/Controller/Main.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Importer/GoogleImporter.php" afterPath="$PROJECT_DIR$/src/Importer/GoogleImporter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Importer/ImporterInterface.php" afterPath="$PROJECT_DIR$/src/Importer/ImporterInterface.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -48,8 +43,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="495">
-                <caret line="33" column="62" lean-forward="true" selection-start-line="33" selection-start-column="62" selection-end-line="33" selection-end-column="62" />
+              <first_editor relative-caret-position="225">
+                <caret line="15" column="1" lean-forward="false" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -483,7 +478,7 @@
       <workItem from="1489922042032" duration="37242000" />
       <workItem from="1490121459321" duration="7170000" />
       <workItem from="1492321262471" duration="19541000" />
-      <workItem from="1492354985240" duration="32881000" />
+      <workItem from="1492354985240" duration="32950000" />
     </task>
     <servers />
   </component>
@@ -520,7 +515,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122198000" />
+    <option name="totallyTimeSpent" value="122267000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1027,8 +1022,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="495">
-            <caret line="33" column="62" lean-forward="true" selection-start-line="33" selection-start-column="62" selection-end-line="33" selection-end-column="62" />
+          <first_editor relative-caret-position="225">
+            <caret line="15" column="1" lean-forward="false" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
             <folding />
           </first_editor>
           <second_editor />
