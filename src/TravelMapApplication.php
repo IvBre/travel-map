@@ -20,6 +20,9 @@ use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\SessionServiceProvider;
 
+/**
+ * @codeCoverageIgnore
+ */
 final class TravelMapApplication extends Application {
 
     public function __construct(array $values = []) {

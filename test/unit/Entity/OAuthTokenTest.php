@@ -81,6 +81,26 @@ class OAuthTokenTest extends TestCase {
      * @param AccessToken $accessToken
      * @param DateTime $expiresOn
      * @param DateTime $created
+     * @param AccessToken $refreshToken
+     *
+     * @covers ::__construct
+     * @covers ::getRefreshToken
+     * @dataProvider getOauthTokenAttributes
+     */
+    public function testGetRefreshToken($id, $userId, $service, $accessToken, $expiresOn, $created, $refreshToken) {
+        $entity = new OAuthToken($id, $userId, $service, $accessToken, $expiresOn, $created, null, $refreshToken);
+        $actual = $entity->getRefreshToken();
+
+        $this->assertSame($refreshToken, $actual);
+    }
+
+    /**
+     * @param int $id
+     * @param int $userId
+     * @param Service $service
+     * @param AccessToken $accessToken
+     * @param DateTime $expiresOn
+     * @param DateTime $created
      *
      * @covers ::__construct
      * @covers ::getExpiresOn
@@ -137,6 +157,7 @@ class OAuthTokenTest extends TestCase {
      * @param int $userId
      * @param Service $service
      * @param AccessToken $accessToken
+     * @param AccessToken $refreshToken
      * @param DateTime $expiresOn
      * @param DateTime $created
      *
@@ -144,18 +165,19 @@ class OAuthTokenTest extends TestCase {
      * @covers ::getCredentials
      * @dataProvider getOauthTokenAttributes
      */
-    public function testGetCredentials($id, $userId, $service, $accessToken, $expiresOn, $created) {
+    public function testGetCredentials($id, $userId, $service, $accessToken, $expiresOn, $created, $refreshToken) {
         $now = new \DateTime();
         $diff = $now->diff($expiresOn->getDateTime());
 
         $expected = [
             'access_token' => (string) $accessToken,
+            'refresh_token' => (string) $refreshToken,
             'expires_in' => $diff->format('U'),
             'expires_on' => (string) $expiresOn,
             'issued_at' => (string) $created,
         ];
 
-        $entity = new OAuthToken($id, $userId, $service, $accessToken, $expiresOn, $created);
+        $entity = new OAuthToken($id, $userId, $service, $accessToken, $expiresOn, $created, null, $refreshToken);
         $actual = $entity->getCredentials();
 
         $this->assertSame($expected, $actual);
@@ -169,7 +191,8 @@ class OAuthTokenTest extends TestCase {
                 new Service('google'),
                 new AccessToken('lk3j45k4hjk6456j5g67'),
                 new DateTime(date('Y-m-d H:i:s', strtotime('+7 days'))),
-                new DateTime(date('Y-m-d H:i:s'))
+                new DateTime(date('Y-m-d H:i:s')),
+                null
             ],
             [
                 456,
@@ -177,7 +200,8 @@ class OAuthTokenTest extends TestCase {
                 new Service('facebook'),
                 new AccessToken('dslkfjsdlkfhl4k35k3h4k'),
                 new DateTime(date('Y-m-d H:i:s', strtotime('+7 days'))),
-                new DateTime(date('Y-m-d H:i:s'))
+                new DateTime(date('Y-m-d H:i:s')),
+                new AccessToken('aspp345o3p45o3p45op345')
             ]
         ];
     }

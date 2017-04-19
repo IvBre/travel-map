@@ -110,6 +110,7 @@ SQL;
      * @param Text $summary
      * @param Text $attendees
      * @param int $userId
+     * @param int $source
      * @return Event
      */
     public function createEvent(
@@ -120,10 +121,11 @@ SQL;
         Url $link,
         Text $summary,
         Text $attendees,
-        $userId
+        $userId,
+        $source
     ) {
         $this->db->insert('event', [
-            'source' => 1,
+            'source' => $source,
             'location' => $location,
             'latitude' => $coordinates->getLatitude(),
             'longitude' => $coordinates->getLongitude(),
@@ -150,13 +152,15 @@ SQL;
 
     /**
      * @param int $userId
+     * @param int $source
      */
-    public function deleteUserEvents($userId) {
+    public function deleteUserEvents($userId, $source) {
         $query = <<<SQL
 DELETE
 FROM event
 WHERE user_id = ?
+  AND source = ?
 SQL;
-        $this->db->executeQuery($query, [ $userId ]);
+        $this->db->executeQuery($query, [ $userId, $source ]);
     }
 }

@@ -7,10 +7,15 @@
 
 namespace TravelMap\Importer;
 
+use Symfony\Component\Console\Output\OutputInterface;
+
 interface ImporterInterface {
 
     /**
      * Executes the importing of events into db
+     * @param int $userId
+     * @param OutputInterface $output
+     * @return
      */
-    public function execute();
+    public function execute($userId, OutputInterface $output);
 }

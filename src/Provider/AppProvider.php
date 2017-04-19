@@ -15,6 +15,9 @@ use TravelMap\Repository\EventRepository;
 use TravelMap\Repository\OAuthTokenRepository;
 use TravelMap\Repository\UserRepository;
 
+/**
+ * @codeCoverageIgnore
+ */
 final class AppProvider implements ServiceProviderInterface {
 
     /** @inheritdoc */
@@ -38,11 +41,11 @@ final class AppProvider implements ServiceProviderInterface {
 
         // ------------ Importers -------------- //
         $app['importer.google'] = function () use ($app) {
-            return new GoogleImporter($app['user'], $app['base_path']);
+            return new GoogleImporter($app['google'], $app['repository.oauth_token'], $app['repository.event']);
         };
 
         $app['importer.google.command'] = function () use ($app) {
-            return new GoogleImportCommand($app['google'], $app['repository.oauth_token'], $app['repository.event']);
+            return new GoogleImportCommand($app['importer.google']);
         };
     }
 }

@@ -13,7 +13,7 @@ $app->get('/events', 'TravelMap\\Controller\\Main::events')
     ->bind('events');
 $app->get('/events-count', 'TravelMap\\Controller\\Main::eventsCount')
     ->bind('events-count');
-$app->get('/import', 'TravelMap\\Controller\\Main::import')
+$app->get('/import/{source}', 'TravelMap\\Controller\\Main::import')
     ->bind('import');
 $app->get('/shareToken', 'TravelMap\\Controller\\Main::shareToken')
     ->bind('get-share-token');

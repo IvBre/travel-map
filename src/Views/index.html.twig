@@ -14,7 +14,7 @@
     {% endif %}
     {% if app.user %}
         <p>Hello {{ app.user.fullname }}! Your email is {{ app.user.email }}</p>
-        <a href="{{ path('import') }}">Sync with Google Calendar</a>
+        <a href="{{ path('import', { source: 'google' }) }}">Sync with Google Calendar</a>
         <a href="#" class="share-btn">Share</a>
         <a href="{{ logout_path }}">Logout</a>
         <div class="share-box hidden">

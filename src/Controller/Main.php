@@ -7,14 +7,18 @@
 
 namespace TravelMap\Controller;
 
+use Psr\Log\InvalidArgumentException;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Process\Process;
 use TravelMap\Entity\User;
-use TravelMap\Importer\ImporterInterface;
 
+/**
+ * @codeCoverageIgnore
+ */
 final class Main {
 
     /**
@@ -58,14 +62,17 @@ final class Main {
     }
 
     /**
+     * @param string $source
      * @param Application $app
      * @return RedirectResponse
      */
-    public function import(Application $app) {
-        /** @var ImporterInterface $importer */
-        $importer = $app['importer.google'];
-
-        $importer->execute();
+    public function import($source, Application $app) {
+        $source = strtolower($source);
+        if (!isset($app["importer.{$source}"])) {
+            throw new InvalidArgumentException('Requested import source does not exist.');
+        }
+        $process = new Process("{$app['base_path']}app/console import:{$source} {$app['user']->getId()}");
+        $process->start();
 
         $app['session']->getFlashBag()->add('info', "Events are being imported in the background. 
             The page will automatically refresh when new events are imported.");
