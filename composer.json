@@ -24,7 +24,7 @@
         "symfony/process": "^3.2",
         "symfony/asset": "^3.2",
         "symfony/twig-bridge": "^3.2",
-        "twig/twig": "^2.2",
+        "twig/twig": "^1.33",
         "google/apiclient": "^2.1",
         "gigablah/silex-oauth": "^2.0@dev",
         "doctrine/dbal": "^2.5",
