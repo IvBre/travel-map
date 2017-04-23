@@ -5,7 +5,7 @@
  * Time: 6:26 PM
  */
 
-namespace TravelMap\Repository;
+namespace TravelMap\Repository\User;
 
 use Doctrine\DBAL\Connection;
 use TravelMap\Entity\User;
@@ -13,7 +13,7 @@ use TravelMap\ValueObject\DateTime;
 use TravelMap\ValueObject\Email;
 use TravelMap\ValueObject\Name;
 
-final class UserRepository {
+final class UserRepository implements UserRepositoryInterface {
 
     /** @var Connection */
     private $db;
@@ -22,10 +22,7 @@ final class UserRepository {
         $this->db = $db;
     }
 
-    /**
-     * @param Email $email
-     * @return null|User
-     */
+    /** @inheritdoc */
     public function getUserByEmail(Email $email) {
         //check if user exists
         $query = <<<SQL
@@ -52,10 +49,7 @@ SQL;
         );
     }
 
-    /**
-     * @param string $token
-     * @return null|User
-     */
+    /** @inheritdoc */
     public function getUserByShareToken($token) {
         $query = <<<SQL
 SELECT id, email, full_name, created, updated
@@ -82,10 +76,7 @@ SQL;
         );
     }
 
-    /**
-     * @param int $userId
-     * @return string
-     */
+    /** @inheritdoc */
     public function getShareTokenByUserId($userId) {
         $query = <<<SQL
 SELECT share_token
@@ -111,11 +102,7 @@ SQL;
         return $shareToken;
     }
 
-    /**
-     * @param Email $email
-     * @param Name $fullName
-     * @return User
-     */
+    /** @inheritdoc */
     public function createUser(Email $email, Name $fullName) {
         $created = new DateTime(date('Y-m-d H:i:s'));
         $this->db->insert('user', [
@@ -133,11 +120,7 @@ SQL;
         );
     }
 
-    /**
-     * @param User $user
-     * @param Name $fullName
-     * @return User
-     */
+    /** @inheritdoc */
     public function updateUser(User $user, Name $fullName) {
         $dateTime = (new \DateTime())->format('Y-m-d H:i:s');
         $this->db->update('user', [

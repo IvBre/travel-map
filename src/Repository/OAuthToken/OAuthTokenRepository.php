@@ -5,7 +5,7 @@
  * Time: 10:00 PM
  */
 
-namespace TravelMap\Repository;
+namespace TravelMap\Repository\OAuthToken;
 
 use Gigablah\Silex\OAuth\Security\Authentication\Token\OAuthTokenInterface;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
@@ -15,7 +15,7 @@ use TravelMap\ValueObject\DateTime;
 use Doctrine\DBAL\Connection;
 use TravelMap\ValueObject\Service;
 
-final class OAuthTokenRepository {
+final class OAuthTokenRepository implements OAuthTokenRepositoryInterface {
 
     /** @var Connection */
     private $db;
@@ -24,11 +24,7 @@ final class OAuthTokenRepository {
         $this->db = $db;
     }
 
-    /**
-     * @param int $userId
-     * @param OAuthTokenInterface $token
-     * @return OAuthToken
-     */
+    /** @inheritdoc */
     public function createOAuthToken($userId, OAuthTokenInterface $token) {
         $service = new Service($token->getService());
         $accessToken = new AccessToken($token->getCredentials());
@@ -63,11 +59,7 @@ final class OAuthTokenRepository {
         );
     }
 
-    /**
-     * @param int $userId
-     * @param OAuthToken $OAuthToken
-     * @return OAuthToken
-     */
+    /** @inheritdoc */
     public function updateOAuthToken($userId, OAuthToken $OAuthToken) {
         $service = $OAuthToken->getService();
         $accessToken = $OAuthToken->getAccessToken();
@@ -92,11 +84,7 @@ final class OAuthTokenRepository {
         );
     }
 
-    /**
-     * @param int $userId
-     * @param OAuthTokenInterface $token
-     * @return null|OAuthToken
-     */
+    /** @inheritdoc */
     public function getOAuthToken($userId, OAuthTokenInterface $token) {
         $query = <<<SQL
 SELECT u.id, ot.service, ot.access_token, u.email, u.full_name, u.created, u.updated
@@ -132,10 +120,7 @@ SQL;
         );
     }
 
-    /**
-     * @param int $userId
-     * @return OAuthToken
-     */
+    /** @inheritdoc */
     public function getLastUsedOAuthToken($userId) {
         $query = <<<SQL
 SELECT id, service, access_token, refresh_token, expires_on, created, last_time_used
@@ -169,12 +154,7 @@ SQL;
         );
     }
 
-    /**
-     * @param int $userId
-     * @param string $service
-     * @throws AccessDeniedException
-     * @return AccessToken
-     */
+    /** @inheritdoc */
     public function getLastRefreshToken($userId, $service) {
         $query = <<<SQL
 SELECT refresh_token 

@@ -14,20 +14,20 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use TravelMap\Entity\User;
-use TravelMap\Repository\OAuthTokenRepository;
-use TravelMap\Repository\UserRepository;
+use TravelMap\Repository\OAuthToken\OAuthTokenRepositoryInterface;
+use TravelMap\Repository\User\UserRepositoryInterface;
 use TravelMap\ValueObject\Email;
 use TravelMap\ValueObject\Name;
 
 final class UserProvider implements UserProviderInterface, OAuthUserProviderInterface {
 
-    /** @var OAuthTokenRepository */
+    /** @var OAuthTokenRepositoryInterface */
     private $oAuthTokenRepository;
 
-    /** @var UserRepository */
+    /** @var UserRepositoryInterface */
     private $repository;
 
-    public function __construct(UserRepository $repository, OAuthTokenRepository $oAuthTokenRepository) {
+    public function __construct(UserRepositoryInterface $repository, OAuthTokenRepositoryInterface $oAuthTokenRepository) {
         $this->repository = $repository;
         $this->oAuthTokenRepository = $oAuthTokenRepository;
     }
@@ -46,26 +46,6 @@ final class UserProvider implements UserProviderInterface, OAuthUserProviderInte
     }
 
     /** @inheritdoc */
-    public function refreshUser(UserInterface $user) {
-        if (!$user instanceof User) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
-        }
-
-        return $this->loadUserByUsername($user->getUsername());
-    }
-
-    /** @inheritdoc */
-    public function supportsClass($class) {
-        return $class === 'TravelMap\Entity\User';
-    }
-
-    /**
-     * Loads a user based on OAuth credentials.
-     *
-     * @param OAuthTokenInterface $token
-     *
-     * @return UserInterface|null
-     */
     public function loadUserByOAuthCredentials(OAuthTokenInterface $token) {
         $email = new Email($token->getEmail());
         $name = new Name($token->getUser());
@@ -89,5 +69,19 @@ final class UserProvider implements UserProviderInterface, OAuthUserProviderInte
         $user->setOAuth($oauthToken);
 
         return $user;
+    }
+
+    /** @inheritdoc */
+    public function refreshUser(UserInterface $user) {
+        if (!$user instanceof User) {
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
+        }
+
+        return $this->loadUserByUsername($user->getUsername());
+    }
+
+    /** @inheritdoc */
+    public function supportsClass($class) {
+        return $class === 'TravelMap\Entity\User';
     }
 }

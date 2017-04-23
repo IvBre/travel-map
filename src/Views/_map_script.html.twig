@@ -1,5 +1,6 @@
 <script>
     var totalPins = 0;
+    var shareToken = '{{ shareToken|default('') }}';
     function addPin(map, event) {
         var eventLatLng = {lat: event.coordinates.lat, lng: event.coordinates.lng};
 
@@ -24,7 +25,10 @@
             contentString += '<div class="attendees"><b>Attendees:</b> ' + event.attendees + '</div>';
         }
 
-        contentString += '<p><a href="' + event.link + '" target="_blank">More details ⇨</a></p>';
+        if (shareToken === '') {
+            contentString += '<p><a href="' + event.link + '" target="_blank">More details ⇨</a></p>';
+        }
+
         contentString += '</div>';
 
         var infowindow = new google.maps.InfoWindow({
@@ -55,7 +59,6 @@
         // send ajax request for events
         var path = '{{ path('events') }}';
 
-        var shareToken = '{{ shareToken|default('') }}';
         if (shareToken !== '') {
             path += '?st=' + shareToken;
         }

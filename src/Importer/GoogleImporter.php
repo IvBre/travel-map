@@ -7,14 +7,13 @@
 
 namespace TravelMap\Importer;
 
-use Google_Client;
 use Google_Service_Calendar;
 use Google_Service_Calendar_CalendarListEntry;
 use Google_Service_Calendar_EventAttendee;
 use Symfony\Component\Console\Output\OutputInterface;
-use TravelMap\Repository\EventRepository;
-use TravelMap\Repository\OAuthTokenRepository;
-use TravelMap\ValueObject\Coordinates;
+use TravelMap\CoordinatesResolver\CoordinatesResolverInterface;
+use TravelMap\Factory\GoogleServiceFactory;
+use TravelMap\Repository\Event\EventRepositoryInterface;
 use TravelMap\ValueObject\DateTime;
 use TravelMap\ValueObject\Name;
 use TravelMap\ValueObject\Text;
@@ -25,13 +24,13 @@ final class GoogleImporter implements ImporterInterface {
 
     const SOURCE = 1;
 
+    /** @var CoordinatesResolverInterface */
+    private $coordinatesResolver;
+
     /** @var string|array */
-    private $authConfig;
+    private $factory;
 
-    /** @var OAuthTokenRepository */
-    private $oAuthTokenRepository;
-
-    /** @var EventRepository */
+    /** @var EventRepositoryInterface */
     private $eventRepository;
 
     /** @var OutputInterface */
@@ -39,27 +38,26 @@ final class GoogleImporter implements ImporterInterface {
 
     private $userId;
 
-    public function __construct($authConfig, OAuthTokenRepository $oAuthTokenRepository, EventRepository $eventRepository) {
-        $this->authConfig = $authConfig;
-        $this->oAuthTokenRepository = $oAuthTokenRepository;
+    public function __construct(
+        GoogleServiceFactory $factory,
+        EventRepositoryInterface $eventRepository,
+        CoordinatesResolverInterface $coordinatesResolver
+    ) {
+        $this->factory = $factory;
         $this->eventRepository = $eventRepository;
+        $this->coordinatesResolver = $coordinatesResolver;
     }
 
     /** @inheritdoc */
     public function execute($userId, OutputInterface $output) {
         $this->userId = $userId;
         $this->output = $output;
-        $oAuthToken = $this->oAuthTokenRepository->getLastUsedOAuthToken($userId);
 
-        $client = new Google_Client();
-        $client->setScopes([ Google_Service_Calendar::CALENDAR_READONLY ]);
-        $client->setAuthConfig($this->authConfig);
-        $client->setAccessToken($oAuthToken->getCredentials());
+        $service = $this->factory->create($userId);
 
         // clear previous imported events
         $this->eventRepository->deleteUserEvents($userId, self::SOURCE);
 
-        $service = new Google_Service_Calendar($client);
         $calendarList = $service->calendarList->listCalendarList();
         $result = 0;
         /** @var Google_Service_Calendar_CalendarListEntry $calendar */
@@ -78,7 +76,8 @@ final class GoogleImporter implements ImporterInterface {
      * @param string|null $nextPageToken
      * @return int
      */
-    private function importEvents($service, $calendarId = 'primary', $nextPageToken = null) {
+    private function importEvents($service, $calendarId = 'primary', $nextPageToken = null)
+    {
         $optParams = [
             'showHiddenInvitations' => true,
             'singleEvents' => true,
@@ -101,7 +100,7 @@ final class GoogleImporter implements ImporterInterface {
                 continue;
             }
             $location = new Name($event->getLocation());
-            $coordinates = $this->getCoordinates($location);
+            $coordinates = $this->coordinatesResolver->resolve($location);
             // event location is not a valid location so skip this event
             if (!$coordinates) {
                 $this->output->writeln("Coordinates not available.");
@@ -122,7 +121,7 @@ final class GoogleImporter implements ImporterInterface {
             $attendees = '';
             /** @var Google_Service_Calendar_EventAttendee $attendee */
             foreach ($event->getAttendees() as $attendee) {
-                $attendees.=$attendee->getDisplayName();
+                $attendees .= $attendee->getDisplayName();
             }
             $attendees = new Text($attendees);
 
@@ -147,37 +146,5 @@ final class GoogleImporter implements ImporterInterface {
         }
 
         return $events;
-    }
-
-    /**
-     * @param string $address
-     * @return bool|Coordinates
-     */
-    private function getCoordinates($address){
-        $address = urlencode($address);
-        $url = "https://maps.google.com/maps/api/geocode/json?address=$address&key={$this->authConfig['api_key']}&sensor=false";
-
-        $ch = curl_init();
-        $options = array(
-            CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_URL            => $url,
-            CURLOPT_HEADER         => false,
-        );
-
-        curl_setopt_array($ch, $options);
-        $response = curl_exec($ch);
-        curl_close($ch);
-        if (!$response) {
-            return false;
-        }
-        $response = json_decode($response);
-        if ($response->status !== 'OK') {
-            return false;
-        }
-        $lat  = $response->results[0]->geometry->location->lat;
-        $long = $response->results[0]->geometry->location->lng;
-
-        return new Coordinates($lat, $long);
     }
 }

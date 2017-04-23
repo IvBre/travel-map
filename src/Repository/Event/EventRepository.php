@@ -5,7 +5,7 @@
  * Time: 9:06 PM
  */
 
-namespace TravelMap\Repository;
+namespace TravelMap\Repository\Event;
 
 use Doctrine\DBAL\Connection;
 use TravelMap\Entity\Event;
@@ -15,7 +15,7 @@ use TravelMap\ValueObject\Name;
 use TravelMap\ValueObject\Text;
 use TravelMap\ValueObject\Url;
 
-final class EventRepository {
+final class EventRepository implements EventRepositoryInterface {
 
     /** @var Connection */
     private $db;
@@ -24,10 +24,7 @@ final class EventRepository {
         $this->db = $db;
     }
 
-    /**
-     * @param int $userId
-     * @return array
-     */
+    /** @inheritdoc */
     public function getAllEventsByUser($userId) {
         $query = <<<SQL
 SELECT id, source, location, latitude, longitude, visited_from, visited_until, link, summary, attendees
@@ -57,11 +54,7 @@ SQL;
         return $events;
     }
 
-    /**
-     * @param int $userId
-     * @param Coordinates $coordinates
-     * @return null|Event
-     */
+    /** @inheritdoc */
     public function getEventByCoordinates($userId, Coordinates $coordinates) {
         $query = <<<SQL
 SELECT id, source, location, visited_from, visited_until, link, summary, attendees
@@ -86,10 +79,7 @@ SQL;
         );
     }
 
-    /**
-     * @param int $userId
-     * @return int
-     */
+    /** @inheritdoc */
     public function getCountOfAllEventsByUser($userId) {
         $query = <<<SQL
 SELECT COUNT(*) AS total
@@ -101,18 +91,7 @@ SQL;
         return $result['total'];
     }
 
-    /**
-     * @param Name $location
-     * @param Coordinates $coordinates
-     * @param DateTime $startDate
-     * @param DateTime $endDate
-     * @param Url $link
-     * @param Text $summary
-     * @param Text $attendees
-     * @param int $userId
-     * @param int $source
-     * @return Event
-     */
+    /** @inheritdoc */
     public function createEvent(
         Name $location,
         Coordinates $coordinates,
@@ -150,10 +129,7 @@ SQL;
         );
     }
 
-    /**
-     * @param int $userId
-     * @param int $source
-     */
+    /** @inheritdoc */
     public function deleteUserEvents($userId, $source) {
         $query = <<<SQL
 DELETE
