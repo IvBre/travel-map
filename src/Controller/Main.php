@@ -71,11 +71,15 @@ final class Main {
         if (!isset($app["importer.{$source}"])) {
             throw new InvalidArgumentException('Requested import source does not exist.');
         }
-        $process = new Process("{$app['base_path']}app/console import:{$source} {$app['user']->getId()}");
+        $command = "{$app['base_path']}app/console import:{$source} {$app['user']->getId()}";
+
+        $process = new Process($command);
         $process->start();
 
+        sleep(1);
+
         $app['session']->getFlashBag()->add('info', "Events are being imported in the background. 
-            The page will automatically refresh when new events are imported.");
+            The page will automatically refresh when new events are imported. $".$command);
 
         return new RedirectResponse('/');
     }
@@ -126,7 +130,7 @@ final class Main {
             }
             return $user->getId();
         }
-        elseif (isset($app['user'])) {
+        elseif (isset($app['user']) && $app['user'] instanceof User::class) {
             return $app['user']->getId();
         }
 
