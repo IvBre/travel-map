@@ -74,8 +74,8 @@
       <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Views/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="479">
-              <caret line="66" column="47" lean-forward="true" selection-start-line="66" selection-start-column="47" selection-end-line="66" selection-end-column="47" />
+            <state relative-caret-position="434">
+              <caret line="66" column="112" lean-forward="false" selection-start-line="66" selection-start-column="112" selection-end-line="66" selection-end-column="112" />
               <folding />
             </state>
           </provider>
@@ -709,7 +709,7 @@
       <workItem from="1492321262471" duration="19541000" />
       <workItem from="1492354985240" duration="37179000" />
       <workItem from="1492624950852" duration="5352000" />
-      <workItem from="1492946472747" duration="21632000" />
+      <workItem from="1492946472747" duration="22223000" />
     </task>
     <servers />
   </component>
@@ -746,7 +746,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="153480000" />
+    <option name="totallyTimeSpent" value="154071000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1259,8 +1259,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Views/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="66" column="47" lean-forward="true" selection-start-line="66" selection-start-column="47" selection-end-line="66" selection-end-column="47" />
+        <state relative-caret-position="434">
+          <caret line="66" column="112" lean-forward="false" selection-start-line="66" selection-start-column="112" selection-end-line="66" selection-end-column="112" />
           <folding />
         </state>
       </provider>

@@ -40,7 +40,8 @@
 {% block script %}
     {{ parent() }}
     <script>
-        function shortneLink(url) {
+        function shortenLink(url) {
+            var longUrl = url;
             $.ajax({
                 url: 'https://www.googleapis.com/urlshortener/v1/url?key={{ api_key }}',
                 type: 'POST',
@@ -48,15 +49,26 @@
                 data: '{ longUrl: "' + url +'"}',
                 dataType: 'json',
                 success: function(response) {
-                    var result = JSON.parse(response);
-                    if (result.id !== undefined) {
-                        return result.id;
+                    console.log(response);
+                    console.log(response.id);
+                    if (undefined !== response.id) {
+                        url = response.id;
                     }
+                    populateShareElements(longUrl, url);
                 }
             });
-
-            return url;
         }
+
+        function populateShareElements(longUrl, shortUrl) {
+            var longUrlEncoded = encodeURI(longUrl);
+            var shortUrlEncoded = encodeURI(shortUrl);
+            $('.share-box input').val(shortUrlEncoded);
+            $('.share-box a.fb').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=' + longUrlEncoded);
+            $('.share-box a.twt').attr('href', 'https://twitter.com/home?status=Check+out+my+awesome+travel+map:+' + shortUrlEncoded);
+            $('.share-box a.gplus').attr('href', 'https://plus.google.com/share?url=Check+out+my+awesome+travel+map+' + longUrlEncoded);
+            $('.share-box').removeClass('hidden');
+        }
+
         $(function() {
             $('.share-btn').on('click', function(e) {
                 e.preventDefault();
@@ -64,13 +76,9 @@
                     if (data.shareToken !== undefined) {
                         var url = '{{ url('share', { token: 'token' }) }}';
                         url = url.replace('token', data.shareToken);
-                        url = shortneLink(url);
-                        var urlEncoded = encodeURI(url);
-                        $('.share-box input').val(url);
-                        $('.share-box a.fb').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=' + urlEncoded);
-                        $('.share-box a.twt').attr('href', 'https://twitter.com/home?status=' + urlEncoded);
-                        $('.share-box a.gplus').attr('href', 'https://plus.google.com/share?url=Check+out+my+awesome+travel+map+' + urlEncoded);
-                        $('.share-box').removeClass('hidden');
+                        url = shortenLink(url);
+                        console.log(url);
+
                     }
                 });
             });
