@@ -36,7 +36,7 @@ header .text {
     margin-left: 10px;
 }
 
-.sync-btn {
+.sync-btn, .login-btn {
     padding: 10px 15px;
     margin: 0 10px;
     text-transform: uppercase;
@@ -46,6 +46,11 @@ header .text {
 .sync-google {
     background-color: #f75c50;
     color: #5c1410;
+}
+
+.login-google {
+    background-color: #c0e0bb;
+    color: #404040;
 }
 
 .share-container {

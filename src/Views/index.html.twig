@@ -28,10 +28,8 @@
         </span>
         <a href="{{ logout_path }}" class="logout-btn">Logout</a>
     {% else %}
-        <ul>
-            {#<li><a href="{{ login_paths.facebook }}">Login with Facebook</a></li>#}
-            <li><a href="{{ login_paths.google }}">Login with Google</a></li>
-        </ul>
+        {#<a href="{{ login_paths.facebook }}">Login with Facebook</a>#}
+        <a href="{{ login_paths.google }}" class="login-btn login-google">Login with <b>Google</b></a>
     {% endif %}
 {% endblock %}
 
