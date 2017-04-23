@@ -79,6 +79,8 @@ final class Main {
         $app['session']->getFlashBag()->add('info', "Events are being imported in the background. 
             The page will automatically refresh when new events are imported.");
 
+        sleep(1);
+        
         return new RedirectResponse('/');
     }
 
