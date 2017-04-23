@@ -81,6 +81,13 @@
                 });
             });
 
+            $('body').on('click', function() {
+                $('.share-box').addClass('hidden');
+            });
+            $('.share-box').on('click', function(event){
+                event.stopPropagation();
+            });
+
             $('.social-links a').on('click', function(e) {
                 e.preventDefault();
 
