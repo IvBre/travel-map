@@ -36,8 +36,6 @@ final class TravelMapApplication extends Application {
             'db.options' => $values['db'],
         ]);
 
-        $this->register(new FormServiceProvider());
-
         $this->register(new SessionServiceProvider());
 
         $this->register(new TwigServiceProvider(), [
