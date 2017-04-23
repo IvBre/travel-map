@@ -3,3 +3,5 @@
 /app/config/parameters.json
 /log/
 /log/*
+.DS_Store
+/html/index_dev.php
