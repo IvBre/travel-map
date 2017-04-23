@@ -130,7 +130,7 @@ final class Main {
             }
             return $user->getId();
         }
-        elseif (isset($app['user']) && $app['user'] instanceof User::class) {
+        elseif (isset($app['user']) && $app['user'] instanceof User) {
             return $app['user']->getId();
         }
 
