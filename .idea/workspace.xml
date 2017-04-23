@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3325d67b-5bd6-49b6-927e-3ed4f6b7b667" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Views/base.html.twig" afterPath="$PROJECT_DIR$/src/Views/base.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Views/index.html.twig" afterPath="$PROJECT_DIR$/src/Views/index.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -71,11 +72,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Views/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="66" column="112" lean-forward="false" selection-start-line="66" selection-start-column="112" selection-end-line="66" selection-end-column="112" />
+            <state relative-caret-position="570">
+              <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Views/base.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="83" lean-forward="false" selection-start-line="5" selection-start-column="83" selection-end-line="5" selection-end-column="83" />
               <folding />
             </state>
           </provider>
@@ -185,7 +196,6 @@
         <option value="$PROJECT_DIR$/test/unit/Repository/UserRepositoryTest.php" />
         <option value="$PROJECT_DIR$/test/unit/Repository/User/UserRepositoryTest.php" />
         <option value="$PROJECT_DIR$/test/unit/Repository/Event/EventRepositoryTest.php" />
-        <option value="$PROJECT_DIR$/src/Views/base.html.twig" />
         <option value="$PROJECT_DIR$/html/index.php" />
         <option value="$PROJECT_DIR$/html/index_dev.php" />
         <option value="$PROJECT_DIR$/src/Repository/OAuthToken/OAuthTokenRepository.php" />
@@ -197,6 +207,7 @@
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/src/Views/_map_script.html.twig" />
         <option value="$PROJECT_DIR$/src/Views/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Views/base.html.twig" />
       </list>
     </option>
   </component>
@@ -709,7 +720,7 @@
       <workItem from="1492321262471" duration="19541000" />
       <workItem from="1492354985240" duration="37179000" />
       <workItem from="1492624950852" duration="5352000" />
-      <workItem from="1492946472747" duration="22223000" />
+      <workItem from="1492946472747" duration="22360000" />
     </task>
     <servers />
   </component>
@@ -746,7 +757,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="154071000" />
+    <option name="totallyTimeSpent" value="154208000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1170,14 +1181,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Views/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="53" lean-forward="false" selection-start-line="7" selection-start-column="53" selection-end-line="7" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/unit/Repository/OAuthToken/OAuthTokenRepositoryTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1770">
@@ -1259,8 +1262,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Views/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="66" column="112" lean-forward="false" selection-start-line="66" selection-start-column="112" selection-end-line="66" selection-end-column="112" />
+        <state relative-caret-position="570">
+          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Views/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="83" lean-forward="false" selection-start-line="5" selection-start-column="83" selection-end-line="5" selection-end-column="83" />
           <folding />
         </state>
       </provider>
