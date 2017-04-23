@@ -40,6 +40,23 @@
 {% block script %}
     {{ parent() }}
     <script>
+        function shortneLink(url) {
+            $.ajax({
+                url: 'https://www.googleapis.com/urlshortener/v1/url?key={{ api_key }}',
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: '{ longUrl: "' + url +'"}',
+                dataType: 'json',
+                success: function(response) {
+                    var result = JSON.parse(response);
+                    if (result.id !== undefined) {
+                        return result.id;
+                    }
+                }
+            });
+
+            return url;
+        }
         $(function() {
             $('.share-btn').on('click', function(e) {
                 e.preventDefault();
@@ -47,6 +64,7 @@
                     if (data.shareToken !== undefined) {
                         var url = '{{ url('share', { token: 'token' }) }}';
                         url = url.replace('token', data.shareToken);
+                        url = shortneLink(url);
                         var urlEncoded = encodeURI(url);
                         $('.share-box input').val(url);
                         $('.share-box a.fb').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=' + urlEncoded);
