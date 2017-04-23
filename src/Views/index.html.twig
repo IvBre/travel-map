@@ -13,18 +13,20 @@
         <p>{{ error }}</p>
     {% endif %}
     {% if app.user %}
-        <p>Hello {{ app.user.fullname }}! Your email is {{ app.user.email }}</p>
-        <a href="{{ path('import', { source: 'google' }) }}">Sync with Google Calendar</a>
-        <a href="#" class="share-btn">Share</a>
-        <a href="{{ logout_path }}">Logout</a>
-        <div class="share-box hidden">
-            <div class="social-links">
-                <a href="" class="fb">Share on Facebook</a>
-                <a href="" class="gplus">Share on Google+</a>
-                <a href="" class="twt">Share on Twitter</a>
-            </div>
-            <input type="text" readonly value="" size="60" />
-        </div>
+        <span class="text">Logged in with {{ app.user.email }}</span>
+        <a href="{{ path('import', { source: 'google' }) }}" class="sync-btn sync-google">Sync with <b>Google Calendar</b></a>
+        <span class="share-container">
+            <a href="#" class="share-btn">Share</a>
+            <span class="share-box hidden">
+                <span class="social-links">
+                    <a href="" class="fb">Share on <b>Facebook</b></a>
+                    <a href="" class="gplus">Share on <b>Google+</b></a>
+                    <a href="" class="twt">Share on <b>Twitter</b></a>
+                </span>
+                <input type="text" readonly value="" size="25" onClick="this.select();" title="Short link" />
+            </span>
+        </span>
+        <a href="{{ logout_path }}" class="logout-btn">Logout</a>
     {% else %}
         <ul>
             {#<li><a href="{{ login_paths.facebook }}">Login with Facebook</a></li>#}
@@ -66,7 +68,7 @@
             $('.share-box a.fb').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=' + longUrlEncoded);
             $('.share-box a.twt').attr('href', 'https://twitter.com/home?status=Check+out+my+awesome+travel+map:+' + shortUrlEncoded);
             $('.share-box a.gplus').attr('href', 'https://plus.google.com/share?url=' + longUrlEncoded);
-            $('.share-box').removeClass('hidden');
+            $('.share-box').toggleClass('hidden');
         }
 
         $(function() {
@@ -77,8 +79,6 @@
                         var url = '{{ url('share', { token: 'token' }) }}';
                         url = url.replace('token', data.shareToken);
                         url = shortenLink(url);
-                        console.log(url);
-
                     }
                 });
             });

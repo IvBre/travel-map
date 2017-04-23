@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3325d67b-5bd6-49b6-927e-3ed4f6b7b667" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/parameters.json.dist" afterPath="$PROJECT_DIR$/app/config/parameters.json.dist" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html/css/style.css" afterPath="$PROJECT_DIR$/html/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Views/base.html.twig" afterPath="$PROJECT_DIR$/src/Views/base.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Views/index.html.twig" afterPath="$PROJECT_DIR$/src/Views/index.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,7 +34,7 @@
       <file leaf-file-name="TravelMapApplication.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/TravelMapApplication.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1275">
+            <state relative-caret-position="15">
               <caret line="99" column="12" lean-forward="false" selection-start-line="99" selection-start-column="12" selection-end-line="99" selection-end-column="12" />
               <folding>
                 <element signature="e#121#167#0#PHP" expanded="true" />
@@ -52,41 +53,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parameters.json.dist" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/parameters.json.dist">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="38" lean-forward="false" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="composer.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/composer.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="36" lean-forward="false" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Views/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+            <state relative-caret-position="345">
+              <caret line="23" column="62" lean-forward="false" selection-start-line="23" selection-start-column="62" selection-end-line="23" selection-end-column="62" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Views/base.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="24" lean-forward="true" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
+            <state relative-caret-position="403">
+              <caret line="45" column="40" lean-forward="true" selection-start-line="45" selection-start-column="40" selection-end-line="45" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html/css/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="553">
+              <caret line="71" column="23" lean-forward="false" selection-start-line="71" selection-start-column="23" selection-end-line="71" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -107,7 +98,10 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1770">
               <caret line="129" column="31" lean-forward="false" selection-start-line="129" selection-start-column="19" selection-end-line="129" selection-end-column="31" />
-              <folding />
+              <folding>
+                <element signature="e#6#97#0#PHP" expanded="false" />
+                <element signature="e#132#169#0#PHP" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -163,7 +157,6 @@
         <option value="$PROJECT_DIR$/src/Views/_map.html.twig" />
         <option value="$PROJECT_DIR$/vendor/google/apiclient-services/src/Google/Service/Calendar/Resource/Events.php" />
         <option value="$PROJECT_DIR$/app/console" />
-        <option value="$PROJECT_DIR$/html/css/style.css" />
         <option value="$PROJECT_DIR$/src/Views/header.html.twig" />
         <option value="$PROJECT_DIR$/src/Views/head.html.twig" />
         <option value="$PROJECT_DIR$/src/Views/share.html.twig" />
@@ -203,11 +196,12 @@
         <option value="$PROJECT_DIR$/setup/php/Dockerfile" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/src/Views/_map_script.html.twig" />
-        <option value="$PROJECT_DIR$/src/Views/index.html.twig" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/app/config/parameters.json" />
         <option value="$PROJECT_DIR$/app/config/parameters.json.dist" />
         <option value="$PROJECT_DIR$/src/Views/base.html.twig" />
+        <option value="$PROJECT_DIR$/html/css/style.css" />
+        <option value="$PROJECT_DIR$/src/Views/index.html.twig" />
       </list>
     </option>
   </component>
@@ -721,7 +715,7 @@
       <workItem from="1492354985240" duration="37179000" />
       <workItem from="1492624950852" duration="5352000" />
       <workItem from="1492946472747" duration="22880000" />
-      <workItem from="1492976492169" duration="780000" />
+      <workItem from="1492976492169" duration="3968000" />
     </task>
     <servers />
   </component>
@@ -758,7 +752,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="155508000" />
+    <option name="totallyTimeSpent" value="158696000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -818,13 +812,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/security/Core/Authentication/Token/TokenInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="44" column="20" lean-forward="false" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/lusitanian/oauth/src/OAuth/Common/Token/AbstractToken.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -1084,7 +1071,7 @@
         <state relative-caret-position="256">
           <caret line="107" column="35" lean-forward="false" selection-start-line="107" selection-start-column="35" selection-end-line="107" selection-end-column="35" />
           <folding>
-            <element signature="e#144#219#0#PHP" expanded="true" />
+            <element signature="e#144#219#0#PHP" expanded="false" />
             <marker date="1492967886000" expanded="true" signature="677:695" ph="/** * @param... " />
             <marker date="1492967886000" expanded="true" signature="1845:1863" ph="/** * @param... " />
             <marker date="1492967886000" expanded="true" signature="2628:2646" ph="/** * @param... " />
@@ -1100,7 +1087,7 @@
         <state relative-caret-position="1770">
           <caret line="304" column="43" lean-forward="true" selection-start-line="304" selection-start-column="43" selection-end-line="304" selection-end-column="43" />
           <folding>
-            <element signature="e#148#179#0#PHP" expanded="true" />
+            <element signature="e#148#179#0#PHP" expanded="false" />
             <marker date="1492968021000" expanded="true" signature="4519:4654" ph="SELECT refre... oauth_token" />
             <marker date="1492968021000" expanded="true" signature="5587:5808" ph="/** * @cover... " />
             <marker date="1492968021000" expanded="true" signature="8923:9058" ph="SELECT refre... oauth_token" />
@@ -1120,16 +1107,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1770">
           <caret line="129" column="31" lean-forward="false" selection-start-line="129" selection-start-column="19" selection-end-line="129" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TravelMapApplication.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="99" column="12" lean-forward="false" selection-start-line="99" selection-start-column="12" selection-end-line="99" selection-end-column="12" />
           <folding>
-            <element signature="e#121#167#0#PHP" expanded="true" />
+            <element signature="e#6#97#0#PHP" expanded="false" />
+            <element signature="e#132#169#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1153,14 +1133,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="14" lean-forward="false" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="14" />
           <folding />
         </state>
       </provider>
@@ -1189,18 +1161,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Views/index.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/TravelMapApplication.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        <state relative-caret-position="15">
+          <caret line="99" column="12" lean-forward="false" selection-start-line="99" selection-start-column="12" selection-end-line="99" selection-end-column="12" />
+          <folding>
+            <element signature="e#121#167#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="14" lean-forward="false" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Views/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="24" lean-forward="true" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
+        <state relative-caret-position="403">
+          <caret line="45" column="40" lean-forward="true" selection-start-line="45" selection-start-column="40" selection-end-line="45" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="553">
+          <caret line="71" column="23" lean-forward="false" selection-start-line="71" selection-start-column="23" selection-end-line="71" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Views/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="62" lean-forward="false" selection-start-line="23" selection-start-column="62" selection-end-line="23" selection-end-column="62" />
           <folding />
         </state>
       </provider>

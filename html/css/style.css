@@ -9,17 +9,98 @@ html, body, main {
 }
 
 body {
-    font-family: "Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial";
+    font-family: Helvetica, Arial;
+    font-size: 12px;
+    color: #242424;
 }
 
-header{
-    height: 100px;
-    width: 100%;
+a, a:visited {
+    color: #242424;
+    text-decoration: none;
 }
 
-footer{
-    height: 100px;
+a:hover {
+    color: #575656;
+}
+
+header {
+    height: 35px;
     width: 100%;
+    background-color: #a3ccff;
+    border-bottom: 1px solid #d2ddeb;
+    padding: 10px 0 10px 0;
+    position: relative;
+}
+
+header .text {
+    margin-left: 10px;
+}
+
+.sync-btn {
+    padding: 10px 15px;
+    margin: 0 10px;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.sync-google {
+    background-color: #f75c50;
+    color: #5c1410;
+}
+
+.share-container {
+    position: relative;
+    display: inline-block;
+}
+
+.share-btn {
+    background: url('../img/share.png') no-repeat top right;
+    padding: 1px 17px 2px 0;
+}
+
+.share-box {
+    position: absolute;
+    background: #f8f4da;
+    padding:10px;
+    z-index: 9;
+    margin-top: 10px;
+}
+
+.share-box a {
+    display: block;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.share-box input {
+    padding:5px;
+    font-size:12px;
+}
+
+.logout-btn {
+    float: right;
+    background: url('../img/logout.png') no-repeat top right;
+    padding: 1px 17px 2px 0;
+    margin-right:10px;
+    margin-top: 10px;
+}
+
+.flash-messages .info {
+    background: #f8f4da url('../img/info.png') no-repeat 10px 10px;
+    padding: 15px 10px 15px 40px;
+}
+
+footer {
+    height: 25px;
+    padding-top: 10px;
+    width: 100%;
+    background-color: #a3ccff;
+    border-top: 1px solid #d2ddeb;
+    text-align: center;
+}
+
+footer a {
+    text-decoration: underline;
 }
 
 .hidden {
