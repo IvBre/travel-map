@@ -71,15 +71,13 @@ final class Main {
         if (!isset($app["importer.{$source}"])) {
             throw new InvalidArgumentException('Requested import source does not exist.');
         }
-        $command = "{$app['base_path']}app/console import:{$source} {$app['user']->getId()}";
+        $command = "{$app['base_path']}app/console import:{$source} {$app['user']->getId()} > /tmp/output.log 2>/tmp/output.log &";
 
         $process = new Process($command);
         $process->start();
 
-        sleep(1);
-
         $app['session']->getFlashBag()->add('info', "Events are being imported in the background. 
-            The page will automatically refresh when new events are imported. $".$command);
+            The page will automatically refresh when new events are imported.");
 
         return new RedirectResponse('/');
     }
