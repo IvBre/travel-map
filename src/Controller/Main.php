@@ -80,7 +80,7 @@ final class Main {
             The page will automatically refresh when new events are imported.");
 
         sleep(1);
-        
+
         return new RedirectResponse('/');
     }
 

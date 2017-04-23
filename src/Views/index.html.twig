@@ -66,19 +66,24 @@
             $('.share-box a.fb').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=' + longUrlEncoded);
             $('.share-box a.twt').attr('href', 'https://twitter.com/home?status=Check+out+my+awesome+travel+map:+' + shortUrlEncoded);
             $('.share-box a.gplus').attr('href', 'https://plus.google.com/share?url=' + longUrlEncoded);
-            $('.share-box').toggleClass('hidden');
+            $('.share-box').removeClass('hidden');
         }
 
         $(function() {
             $('.share-btn').on('click', function(e) {
                 e.preventDefault();
-                $.get('{{ path('get-share-token') }}', function(data) {
-                    if (data.shareToken !== undefined) {
-                        var url = '{{ url('share', { token: 'token' }) }}';
-                        url = url.replace('token', data.shareToken);
-                        url = shortenLink(url);
-                    }
-                });
+                e.stopPropagation();
+                if ($('.share-box input').val() !== '') {
+                    $('.share-box').removeClass('hidden');
+                } else {
+                    $.get('{{ path('get-share-token') }}', function(data) {
+                        if (data.shareToken !== undefined) {
+                            var url = '{{ url('share', { token: 'token' }) }}';
+                            url = url.replace('token', data.shareToken);
+                            url = shortenLink(url);
+                        }
+                    });
+                }
             });
 
             $('body').on('click', function() {
