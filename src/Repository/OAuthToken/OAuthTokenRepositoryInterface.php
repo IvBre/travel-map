@@ -8,7 +8,6 @@
 namespace TravelMap\Repository\OAuthToken;
 
 use Gigablah\Silex\OAuth\Security\Authentication\Token\OAuthTokenInterface;
-use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use TravelMap\Entity\OAuthToken;
 use TravelMap\ValueObject\AccessToken;
 
@@ -44,8 +43,7 @@ interface OAuthTokenRepositoryInterface {
     /**
      * @param int $userId
      * @param string $service
-     * @throws AccessDeniedException
-     * @return AccessToken
+     * @return null|AccessToken
      */
     public function getLastRefreshToken($userId, $service);
 }

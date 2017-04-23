@@ -167,7 +167,7 @@ SQL;
         $oathToken = $this->db->fetchAssoc($query, [ $service, $userId ]);
 
         if (!$oathToken) {
-            throw new AccessDeniedException("You need to log in to proceed.");
+            return null;
         }
 
         return new AccessToken($oathToken['refresh_token']);

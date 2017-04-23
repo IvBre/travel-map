@@ -299,14 +299,15 @@ SQL;
      * @covers ::getLastRefreshToken
      * @param int $userId
      * @dataProvider getUserDataProvider
-     * @expectedException \Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException
      */
     public function testGetLastRefreshTokenException($userId) {
         $db = $this->prophesize(Connection::class);
         $db->fetchAssoc(Argument::cetera())
             ->willReturn(false);
         $repository = new OAuthTokenRepository($db->reveal());
-        $repository->getLastRefreshToken($userId, 'Google');
+        $actual = $repository->getLastRefreshToken($userId, 'Google');
+
+        $this->assertNull($actual);
     }
 
     public function getUserDataProvider() {

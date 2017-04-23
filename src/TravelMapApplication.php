@@ -11,10 +11,9 @@ use Gigablah\Silex\OAuth\OAuthServiceProvider;
 use Knp\Provider\ConsoleServiceProvider;
 use Silex\Application;
 use Silex\Provider\AssetServiceProvider;
-use Silex\Provider\FormServiceProvider;
 use Silex\Provider\TwigServiceProvider;
-use Symfony\Component\Form\Exception\InvalidConfigurationException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use TravelMap\Provider\AppProvider;
 use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
@@ -115,6 +114,8 @@ final class TravelMapApplication extends Application {
             'console.version'           => '1.0.0',
             'console.project_directory' => __DIR__.'/..'
         ));
+
+        $this->loadRoutes();
     }
 
     private function loadConfig($values = []) {
@@ -126,11 +127,29 @@ final class TravelMapApplication extends Application {
 
         $parameters = json_decode(file_get_contents($default['app_config_path'] . "/parameters.json"), true);
         if ($parameters === null) {
-            throw new InvalidConfigurationException("parameters.json file is missing from the config folder.");
+            throw new BadCredentialsException("parameters.json file is missing from the config folder.");
         }
 
         $default = array_merge($default, $parameters);
 
         return array_merge($default, $values);
+    }
+
+    private function loadRoutes() {
+        $this->get('/', 'TravelMap\\Controller\\Main::index')
+            ->bind('home');
+        $this->get('/events', 'TravelMap\\Controller\\Main::events')
+            ->bind('events');
+        $this->get('/events-count', 'TravelMap\\Controller\\Main::eventsCount')
+            ->bind('events-count');
+        $this->get('/import/{source}', 'TravelMap\\Controller\\Main::import')
+            ->bind('import');
+        $this->get('/shareToken', 'TravelMap\\Controller\\Main::shareToken')
+            ->bind('get-share-token');
+        $this->get('/share/{token}', 'TravelMap\\Controller\\Main::share')
+            ->bind('share');
+
+        $this->match('/logout', function () {})
+            ->bind('logout');
     }
 }
