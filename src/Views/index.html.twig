@@ -49,8 +49,6 @@
                 data: '{ longUrl: "' + url +'"}',
                 dataType: 'json',
                 success: function(response) {
-                    console.log(response);
-                    console.log(response.id);
                     if (undefined !== response.id) {
                         url = response.id;
                     }
