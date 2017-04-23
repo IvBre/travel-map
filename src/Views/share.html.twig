@@ -3,8 +3,8 @@
 {% block title %}{{ user.fullname }}{% endblock %}
 
 {% block header %}
-<p>You are looking at map from {{ user.fullName }}</p>
-<a href="{{ path('home') }}">Create your own map</a>
+<span class="text">You are looking at map from <b>{{ user.fullName }}</b></span>
+<a href="{{ path('home') }}" class="login-btn login-google">Create your own map</a>
 {% endblock %}
 
 {% block content %}

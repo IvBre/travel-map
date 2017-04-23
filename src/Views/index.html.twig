@@ -13,7 +13,7 @@
         <p>{{ error }}</p>
     {% endif %}
     {% if app.user %}
-        <span class="text">Logged in with {{ app.user.email }}</span>
+        <span class="text">Logged in with <b>{{ app.user.email }}</b></span>
         <a href="{{ path('import', { source: 'google' }) }}" class="sync-btn sync-google">Sync from <b>Google Calendar</b></a>
         <span class="share-container">
             <a href="#" class="share-btn">Share</a>
